@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Genius Web Site{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    {% block extra_head %}
+    <!-- Для дополнительных стилей или скриптов -->
+    {% endblock %}
+</head>
+<body>
+    <header>
+        <a href="/">
+            <img src="{% static 'img/logo1.png' %}" alt="Logo" class="logo">
+        </a>
+        <div class="auth-links">
+            {% if user.is_authenticated %}
+                <span>Welcome, {{ user.username }}</span>
+                <a href="{% url 'logout' %}">Log out</a>
+            {% else %}
+                <a href="{% url 'register' %}">Register</a> / <a href="{% url 'login' %}">Log in</a>
+            {% endif %}
+        </div>
+        <nav aria-label="Main Navigation">
+            <ul class="menu">
+                <li><a href="#">Resume</a>
+                    <ul>
+                        <li><a href="{% url 'programmer_resume:index' %}">Programmer</a></li>
+                        <li><a href="{% url 'musician_resume:index' %}">Musician</a></li>
+                    </ul>
+                </li>
+                <li><a href="{% url 'merch:index' %}">Merch</a></li>
+                <li><a href="{% url 'forum:index' %}">Forum</a></li>
+                <li><a href="{% url 'game:index' %}">Game</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li class="{% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <main class="main-content">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Genius Web Site</p>
+    </footer>
+</body>
+</html>

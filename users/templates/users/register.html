@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Register</h2>
+  <form method="post">
+    {% csrf_token %}
+
+    <div>
+      {{ form.username.label_tag }}<br>
+      {{ form.username }}
+    </div>
+    <div>
+      {{ form.email.label_tag }}<br>
+      {{ form.email }}
+    </div>
+    <div>
+      {{ form.phone.label_tag }}<br>
+      {{ form.phone }}
+    </div>
+    <div>
+      {{ form.password1.label_tag }}<br>
+      {{ form.password1 }}
+    </div>
+    <div>
+      {{ form.password2.label_tag }}<br>
+      {{ form.password2 }}
+    </div>
+
+    <button type="submit">Register</button>
+
+    {% if form.errors %}
+    <ul class="errorlist">
+        {% for field, errors in form.errors.items %}
+            <li>{{ field }}: {{ errors|striptags }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+  </form>
+{% endblock %}
