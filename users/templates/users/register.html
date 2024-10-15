@@ -46,11 +46,13 @@
     function showPopupMessage(message) {
         const popup = document.getElementById('popup-message');
         popup.textContent = message;
-        popup.classList.add('show');
 
-        setTimeout(() => {
-            popup.classList.remove('show');
-        }, 5000); // Сообщение исчезает через 5 секунд
+        if (message.trim() !== "") {  // Проверяем, есть ли текст сообщения
+            popup.classList.add('show');
+            setTimeout(() => {
+                popup.classList.remove('show');
+            }, 5000); // Сообщение исчезает через 5 секунд
+        }
     }
 
     // Показываем сообщение при ошибке
@@ -73,9 +75,9 @@
 
     // Код для удаления всплывающего сообщения через 5 секунд
     window.addEventListener('DOMContentLoaded', function () {
-        var messageBox = document.getElementById('popup-message');
+        const messageBox = document.getElementById('popup-message');
 
-        if (messageBox) {
+        if (messageBox && messageBox.textContent.trim() !== "") {  // Проверяем наличие текста в элементе
             // Показываем сообщение и запускаем таймер на удаление блока
             messageBox.classList.add('show');
 
