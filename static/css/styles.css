@@ -144,6 +144,38 @@ nav {
     color: #a94442;
 }
 
+/* Всплывающие сообщения */
+
+.popup-message {
+    background-color: #f2dede;
+    color: #a94442;
+    padding: 15px;
+    border-radius: 5px;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.popup-message.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Ошибки */
+.errorlist li {
+    color: #a94442; /* Цвет для текста ошибок */
+    font-size: 0.95rem;
+}
+
+.errorlist li strong {
+    font-weight: bold;
+    color: #d9534f; /* Более насыщенный красный для названия поля */
+}
+
 /* Формы */
 form {
     background-color: rgba(255, 255, 255, 0.9);
@@ -153,21 +185,35 @@ form {
     width: 100%;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.05rem;
 }
 
 form input {
     display: block;
     width: calc(100% - 20px);
     padding: 10px;
-    margin: 5px 0;
+    margin: 10px 0;
 }
 
 /* Кнопки */
 button {
     padding: 10px 20px;
+    margin: 10px 0 0 4em;
+    justify-content: center;
+    text-align: center;
     font-size: 1.2rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    background-color: #ffffe5; /* Жёлтый по умолчанию */
+}
+
+button:disabled {
+    background-color: #ffc107; /* Остаётся жёлтым, если кнопка не активна */
+}
+
+button.active {
+    background-color: #007bff; /* Голубой, когда все поля заполнены */
 }
 
 button:hover {

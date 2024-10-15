@@ -24,7 +24,7 @@ class CustomUserCreationForm(UserCreationForm):
 
         # Проверка на длину и начало номера
         if len(phone) != 11 or not phone.startswith(('7', '8')):
-            raise forms.ValidationError('Номер телефона должен содержать 11 цифр и начинаться с "7", "8" или "+7".')
+            raise forms.ValidationError('Номер телефона должен содержать 11 цифр и начинаться с "7" или "8".')
 
         # Форматируем номер так, как он будет сохранен в базе
         formatted_phone = f"+7 ({phone[1:4]}) {phone[4:7]}-{phone[7:9]}-{phone[9:11]}"
@@ -50,15 +50,15 @@ class CustomAuthenticationForm(AuthenticationForm):
             if user:
                 username = user.username
             else:
-                raise forms.ValidationError('Invalid email or username')
+                raise forms.ValidationError('Инвалид email or username')
 
         if username:
             user = authenticate(username=username, password=password)
             if user:
                 self.cleaned_data['user'] = user
             else:
-                raise forms.ValidationError('Invalid login credentials')
+                raise forms.ValidationError('Инвалид login credentials')
         else:
-            raise forms.ValidationError('Invalid login credentials')
+            raise forms.ValidationError('Инвалид login credentials')
 
         return self.cleaned_data

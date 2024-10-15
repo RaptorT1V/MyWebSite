@@ -11,12 +11,16 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            messages.success(request, 'Registration successful!')
+            messages.success(request, 'Success! Регистрация прошла успешно! Congratulations, buddy!')
             return redirect('home')
         else:
-            messages.error(request, 'Registration failed. Please correct the errors below.')
+            # Убираем дублирующее сообщение,
+            # Вот это я называю Epic Fail! Регистрация провалена! Пожалуйста, исправьте Ваши ошибки, представленные ниже.'
+            # которое отображает общую ошибку регистрации
+            pass  # Удаляем строку с messages.error
     else:
         form = CustomUserCreationForm()
+
     return render(request, 'users/register.html', {'form': form})
 
 
@@ -27,7 +31,7 @@ def user_login(request):
         if was_limited:
             form = CustomAuthenticationForm()
             return render(request, 'users/login.html',
-                          {'form': form, 'error': 'Too many attempts. Try again in 10 seconds.'})
+                          {'form': form, 'error': 'Слишком много попыток, чел! Try again in 10 seconds.'})
 
         form = CustomAuthenticationForm(data=request.POST)
         if form.is_valid():

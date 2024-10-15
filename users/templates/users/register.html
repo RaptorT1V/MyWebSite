@@ -2,6 +2,10 @@
 
 {% block content %}
   <h2>Register</h2>
+
+  <!-- Всплывающее сообщение -->
+  <div id="popup-message" class="popup-message"></div>
+
   <form method="post">
     {% csrf_token %}
 
@@ -30,10 +34,41 @@
 
     {% if form.errors %}
     <ul class="errorlist">
-        {% for field, errors in form.errors.items %}
-            <li>{{ field }}: {{ errors|striptags }}</li>
-        {% endfor %}
+      {% for field, errors in form.errors.items %}
+        <li><strong>{{ field }}:</strong> {{ errors|striptags }}</li>
+      {% endfor %}
     </ul>
     {% endif %}
   </form>
+
+  <script>
+    // Функция для показа всплывающего сообщения
+    function showPopupMessage(message) {
+        const popup = document.getElementById('popup-message');
+        popup.textContent = message;
+        popup.classList.add('show');
+
+        setTimeout(() => {
+            popup.classList.remove('show');
+        }, 5000); // Сообщение исчезает через 5 секунд
+    }
+
+    // Показываем сообщение при ошибке
+    {% if form.errors %}
+    showPopupMessage("Registration failed. Please correct the errors below.");
+    {% endif %}
+
+    // Логика для изменения цвета кнопки при заполнении всех полей
+    const form = document.querySelector('form');
+    const button = form.querySelector('button');
+
+    form.addEventListener('input', function () {
+        const allFieldsFilled = [...form.elements].every(input => input.value);
+        if (allFieldsFilled) {
+            button.classList.add('active');
+        } else {
+            button.classList.remove('active');
+        }
+    });
+  </script>
 {% endblock %}
