@@ -1,0 +1,193 @@
+/* Основные стили */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: left;
+    position: relative;
+}
+
+.auth-links {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
+.auth-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.auth-links a:hover {
+    text-decoration: underline;
+}
+
+nav {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+}
+
+.menu li {
+    position: relative;
+}
+
+.menu li a {
+    color: white;
+    text-decoration: none;
+    padding: 15px 20px;
+    font-size: 1.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.menu li a:hover {
+    background-color: #555;
+    border-radius: 5px;
+}
+
+/* Анимация для подменю */
+@keyframes scaleUp {
+    0% {
+        opacity: 0;
+        transform: scaleY(0);
+    }
+    100% {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+}
+
+.menu li ul {
+    display: none;
+    position: absolute;
+    background-color: rgba(68, 68, 68, 0.9);
+    padding: 5px;
+    list-style: none;
+    top: calc(100% + 10px);
+    left: 0;
+    border-radius: 2px;
+    min-width: 100px;
+    z-index: 1000;
+}
+
+.menu li:hover ul {
+    display: block;
+    animation: scaleUp 0.3s ease forwards;
+}
+
+.menu li ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+}
+
+.menu li ul li a:hover {
+    background-color: #575757;
+}
+
+/* Контент */
+.main-content {
+    background: url('../img/start_image.png') no-repeat center center fixed;
+    background-size: cover;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-content h1 {
+    color: white;
+    font-size: 4rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Сообщения */
+.messages {
+    margin: 20px auto;
+    max-width: 400px;
+    text-align: center;
+}
+
+.messages li {
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.messages li.success {
+    background-color: #dff0d8;
+    color: #3c763d;
+}
+
+.messages li.error {
+    background-color: #f2dede;
+    color: #a94442;
+}
+
+/* Формы */
+form {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    margin: 50px auto;
+    max-width: 400px;
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+form input {
+    display: block;
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 5px 0;
+}
+
+/* Кнопки */
+button {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #777;
+}
+
+/* Логотип */
+.logo {
+    width: 9em;
+    height: 3em;
+    float: left;
+    margin-right: 20px;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: auto;
+    width: 100%;
+}
