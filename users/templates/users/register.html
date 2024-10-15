@@ -70,5 +70,25 @@
             button.classList.remove('active');
         }
     });
+
+    // Код для удаления всплывающего сообщения через 5 секунд
+    window.addEventListener('DOMContentLoaded', function () {
+        var messageBox = document.getElementById('popup-message');
+
+        if (messageBox) {
+            // Показываем сообщение и запускаем таймер на удаление блока
+            messageBox.classList.add('show');
+
+            setTimeout(function () {
+                // Сначала скрываем блок
+                messageBox.classList.remove('show');
+
+                // Затем полностью удаляем его из DOM
+                setTimeout(function () {
+                    messageBox.remove();
+                }, 500);  // Дожидаемся окончания анимации скрытия
+            }, 5000);  // Через 5 секунд начинаем скрывать
+        }
+    });
   </script>
 {% endblock %}

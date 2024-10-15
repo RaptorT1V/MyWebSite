@@ -167,7 +167,7 @@ nav {
 
 /* Ошибки */
 .errorlist li {
-    color: #a94442; /* Цвет для текста ошибок */
+    color: #700733; /* Цвет для текста ошибок */
     font-size: 0.95rem;
 }
 
@@ -199,7 +199,7 @@ form input {
 /* Кнопки */
 button {
     padding: 10px 20px;
-    margin: 10px 0 0 4em;
+    margin: 10px 0 0 5.5em;
     justify-content: center;
     text-align: center;
     font-size: 1.2rem;
@@ -217,7 +217,7 @@ button.active {
 }
 
 button:hover {
-    background-color: #777;
+    background-color: #a198e3;
 }
 
 /* Логотип */

@@ -18,20 +18,20 @@ class CustomUserCreationForm(UserCreationForm):
 
         # Проверяем, чтобы первый символ был числом
         if not phone[0].isdigit():
-            raise forms.ValidationError('Номер телефона должен начинаться с цифры.')
+            raise forms.ValidationError('The phone number must begin with a digit.')
 
         phone = re.sub(r'\D', '', phone)  # Убираем все символы, кроме цифр
 
         # Проверка на длину и начало номера
         if len(phone) != 11 or not phone.startswith(('7', '8')):
-            raise forms.ValidationError('Номер телефона должен содержать 11 цифр и начинаться с "7" или "8".')
+            raise forms.ValidationError('The phone number must contain 11 digits and begin with “7” or “8”.')
 
         # Форматируем номер так, как он будет сохранен в базе
         formatted_phone = f"+7 ({phone[1:4]}) {phone[4:7]}-{phone[7:9]}-{phone[9:11]}"
 
         # Проверяем, уникален ли отформатированный номер
         if CustomUser.objects.filter(phone=formatted_phone).exists():
-            raise forms.ValidationError('Пользователь с таким номером телефона уже существует.')
+            raise forms.ValidationError('User with this phone number already exists.')
 
         return phone
 
