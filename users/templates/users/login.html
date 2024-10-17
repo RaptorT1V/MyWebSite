@@ -3,7 +3,6 @@
 {% block content %}
   <h2 style="color: red">Login</h2>
 
-  <!-- Всплывающее сообщение -->
   <div id="popup-message" class="popup-message"></div>
 
   <form method="post">
@@ -15,25 +14,22 @@
   <h2 style="color: red">Login</h2>
 
   <script>
-    // Функция для показа всплывающего сообщения
     function showPopupMessage(message) {
         const popup = document.getElementById('popup-message');
         popup.textContent = message;
 
-        if (message.trim() !== "") {  // Проверяем, есть ли текст сообщения
+        if (message.trim() !== "") {
             popup.classList.add('show');
             setTimeout(() => {
                 popup.classList.remove('show');
-            }, 5000); // Сообщение исчезает через 5 секунд
+            }, 3000);
         }
     }
 
-    // Показываем сообщение при ошибке
     {% if error %}
     showPopupMessage("{{ error }}");
     {% endif %}
 
-    // Логика для изменения цвета кнопки при заполнении всех полей
     const form = document.querySelector('form');
     const button = form.querySelector('button');
 
@@ -46,23 +42,19 @@
         }
     });
 
-    // Код для удаления всплывающего сообщения через 5 секунд
     window.addEventListener('DOMContentLoaded', function () {
         const messageBox = document.getElementById('popup-message');
 
-        if (messageBox && messageBox.textContent.trim() !== "") {  // Проверяем наличие текста в элементе
-            // Показываем сообщение и запускаем таймер на удаление блока
+        if (messageBox && messageBox.textContent.trim() !== "") {
             messageBox.classList.add('show');
 
             setTimeout(function () {
-                // Сначала скрываем блок
                 messageBox.classList.remove('show');
 
-                // Затем полностью удаляем его из DOM
                 setTimeout(function () {
                     messageBox.remove();
-                }, 500);  // Дожидаемся окончания анимации скрытия
-            }, 5000);  // Через 5 секунд начинаем скрывать
+                }, 500);
+            }, 5000);
         }
     });
   </script>

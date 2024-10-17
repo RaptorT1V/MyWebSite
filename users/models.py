@@ -5,23 +5,23 @@ import re
 
 class CustomUser(AbstractUser):
     email = models.EmailField(unique=True)
-    phone = models.CharField(max_length=18, unique=True)  # Увеличен max_length для корректного сохранения номеров
+    phone = models.CharField(max_length=18, unique=True)
 
     def save(self, *args, **kwargs):
-        self.phone = re.sub(r'\D', '', self.phone)  # Убираем все символы, кроме цифр
+        self.phone = re.sub(r'\D', '', self.phone)
         if self.phone.startswith('8'):
-            self.phone = '7' + self.phone[1:]  # Заменяем 8 на 7
-        self.phone = f"+7 ({self.phone[1:4]}) {self.phone[4:7]}-{self.phone[7:9]}-{self.phone[9:11]}"  # Форматируем номер
+            self.phone = '7' + self.phone[1:]
+        self.phone = f"+7 ({self.phone[1:4]}) {self.phone[4:7]}-{self.phone[7:9]}-{self.phone[9:11]}"
         super().save(*args, **kwargs)
 
     groups = models.ManyToManyField(
         'auth.Group',
-        related_name='customuser_set',  # Добавляем related_name для избежания конфликта
+        related_name='customuser_set',
         blank=True
     )
     user_permissions = models.ManyToManyField(
         'auth.Permission',
-        related_name='customuser_user_permissions_set',  # Добавляем related_name
+        related_name='customuser_user_permissions_set',
         blank=True
     )
 

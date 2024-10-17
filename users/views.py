@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from .forms import CustomUserCreationForm, CustomAuthenticationForm
 from django_ratelimit.decorators import ratelimit
+from django.contrib.auth.hashers import check_password
+import logging
 
 
 def register(request):
@@ -14,10 +16,7 @@ def register(request):
             messages.success(request, 'Success! Регистрация прошла успешно! Congratulations, buddy!')
             return redirect('home')
         else:
-            # Убираем дублирующее сообщение,
-            # Вот это я называю Epic Fail! Регистрация провалена! Пожалуйста, исправьте Ваши ошибки, представленные ниже.'
-            # которое отображает общую ошибку регистрации
-            pass  # Удаляем строку с messages.error
+            pass
     else:
         form = CustomUserCreationForm()
 
@@ -40,7 +39,6 @@ def user_login(request):
             login(request, form.cleaned_data['user'])
             return redirect('user_profile')
         else:
-            # Передаем ошибку как всплывающее сообщение
             return render(request, 'users/login.html', {
                 'form': form,
                 'error': 'У тебя реквизиты для входа -- инвалиды!'
