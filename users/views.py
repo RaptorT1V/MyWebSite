@@ -30,15 +30,21 @@ def user_login(request):
         was_limited = getattr(request, 'limits', False)
         if was_limited:
             form = CustomAuthenticationForm()
-            return render(request, 'users/login.html',
-                          {'form': form, 'error': 'Слишком много попыток, чел! Try again in 10 seconds.'})
+            return render(request, 'users/login.html', {
+                'form': form,
+                'error': 'Слишком много попыток, чел! Try again in 10 seconds.'
+            })
 
         form = CustomAuthenticationForm(data=request.POST)
         if form.is_valid():
             login(request, form.cleaned_data['user'])
             return redirect('user_profile')
         else:
-            return render(request, 'users/login.html', {'form': form, 'error': 'Invalid login credentials'})
+            # Передаем ошибку как всплывающее сообщение
+            return render(request, 'users/login.html', {
+                'form': form,
+                'error': 'У тебя реквизиты для входа -- инвалиды!'
+            })
     else:
         form = CustomAuthenticationForm()
 

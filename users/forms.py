@@ -3,6 +3,8 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import CustomUser
 from django.contrib.auth import authenticate
+from django.utils.safestring import mark_safe
+from django.urls import reverse
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -36,7 +38,7 @@ class CustomUserCreationForm(UserCreationForm):
         return phone
 
 
-class CustomAuthenticationForm(AuthenticationForm):
+class CustomAuthenticationForm(forms.Form):
     username_or_email = forms.CharField(label='Username or Email', max_length=255)
     password = forms.CharField(widget=forms.PasswordInput)
 
@@ -47,18 +49,23 @@ class CustomAuthenticationForm(AuthenticationForm):
         # Логика аутентификации по email или имени пользователя
         if '@' in username_or_email:
             user = CustomUser.objects.filter(email=username_or_email).first()
-            if user:
-                username = user.username
-            else:
-                raise forms.ValidationError('Инвалид email or username')
-
-        if username:
-            user = authenticate(username=username, password=password)
-            if user:
-                self.cleaned_data['user'] = user
-            else:
-                raise forms.ValidationError('Инвалид login credentials')
+            if not user:
+                raise forms.ValidationError(
+                    mark_safe('Такого e-mail не существует! Хотите <a href="{}">зарегистрироваться</a>?'.format(reverse('register')))
+                )
+            username = user.username
         else:
-            raise forms.ValidationError('Инвалид login credentials')
+            user = CustomUser.objects.filter(username=username_or_email).first()
+            if not user:
+                raise forms.ValidationError(
+                    mark_safe('Такого имени не существует! Хотите <a href="{}">зарегистрироваться</a>?'.format(reverse('register')))
+                )
+            username = username_or_email
 
+        # Аутентификация пользователя по username и паролю
+        user = authenticate(username=username, password=password)
+        if user is None:
+            raise forms.ValidationError('Чувак, твои login credentials получили инвалидность')
+
+        self.cleaned_data['user'] = user
         return self.cleaned_data
