@@ -145,10 +145,7 @@ nav {
 }
 
 /* Всплывающие сообщения */
-
 .popup-message {
-    background-color: #f2dede;
-    color: #a94442;
     padding: 15px;
     border-radius: 5px;
     position: fixed;
@@ -165,15 +162,25 @@ nav {
     transform: translateY(0);
 }
 
+.popup-message-bad {
+    background-color: #f2dede;
+    color: #a94442;
+}
+
+.popup-message-good {
+    background-color: #dff0d8;
+    color: #3c763d;
+}
+
 /* Ошибки */
 .errorlist li {
-    color: #700733; /* Цвет для текста ошибок */
+    color: #700733;
     font-size: 0.95rem;
 }
 
 .errorlist li strong {
     font-weight: bold;
-    color: #d9534f; /* Более насыщенный красный для названия поля */
+    color: #d9534f;
 }
 
 /* Формы */
@@ -205,15 +212,15 @@ button {
     font-size: 1.2rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    background-color: #ffffe5; /* Жёлтый по умолчанию */
+    background-color: #ffffe5;
 }
 
 button:disabled {
-    background-color: #ffc107; /* Остаётся жёлтым, если кнопка не активна */
+    background-color: #ffc107;
 }
 
 button.active {
-    background-color: #007bff; /* Голубой, когда все поля заполнены */
+    background-color: #007bff;
 }
 
 button:hover {

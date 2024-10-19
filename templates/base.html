@@ -6,54 +6,58 @@
     <title>{% block title %}Genius Web Site{% endblock %}</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <link rel="icon" href="{% static 'img/icons/favicon2.ico' %}">
     {% block extra_head %}
     <!-- Для дополнительных стилей или скриптов -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     {% endblock %}
 </head>
 <body>
-    <header>
-        <a href="/">
-            <img src="{% static 'img/logo1.png' %}" alt="Logo" class="logo">
-        </a>
-        <div class="auth-links">
-            {% if user.is_authenticated %}
-                <span>Welcome, {{ user.username }}</span>
-                <a href="{% url 'logout' %}">Log out</a>
-            {% else %}
-                <a href="{% url 'register' %}">Register</a> / <a href="{% url 'login' %}">Log in</a>
-            {% endif %}
-        </div>
-        <nav aria-label="Main Navigation">
-            <ul class="menu">
-                <li><a href="#">Resume</a>
-                    <ul>
-                        <li><a href="{% url 'programmer_resume:index' %}">Programmer</a></li>
-                        <li><a href="{% url 'musician_resume:index' %}">Musician</a></li>
-                    </ul>
-                </li>
-                <li><a href="{% url 'merch:index' %}">Merch</a></li>
-                <li><a href="{% url 'forum:index' %}">Forum</a></li>
-                <li><a href="{% url 'game:index' %}">Game</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-                <li class="{% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</li>
-            {% endfor %}
+<header>
+    <a href="/">
+        <img src="/static/img/logos/test5.png" alt="Logo" class="logo">
+    </a>
+    <div class="auth-links">
+        {% if user.is_authenticated %}
+        <span>Welcome, {{ user.username }}</span>
+        <a href="{% url 'logout' %}">Log out</a>
+        {% else %}
+        <a href="{% url 'register' %}">Register</a> / <a href="{% url 'login' %}">Log in</a>
+        {% endif %}
+    </div>
+    <nav aria-label="Main Navigation">
+        <ul class="menu">
+            <li><a href="#">Resume</a>
+                <ul>
+                    <li><a href="{% url 'programmer_resume:index' %}">Programmer</a></li>
+                    <li><a href="{% url 'musician_resume:index' %}">Musician</a></li>
+                </ul>
+            </li>
+            <li><a href="{% url 'merch:index' %}">Merch</a></li>
+            <li><a href="{% url 'forum:index' %}">Forum</a></li>
+            <li><a href="{% url 'game:index' %}">Game</a></li>
         </ul>
+    </nav>
+</header>
+
+<!-- Всплывающее сообщение -->
+<div id="popup-message" class="popup-message"></div>
+
+<main class="main-content">
+    {% block content %}
+    {% endblock %}
+</main>
+
+<footer>
+    <p>&copy; 2024 Genius Web Site</p>
+</footer>
+
+<script src="{% static 'js/popup.js' %}"></script>
+<script>
+    // Показываем сообщение, если оно есть
+    {% if messages %}
+    showPopupMessage("{% for message in messages %}{{ message }}{% endfor %}", 'good');
     {% endif %}
-
-    <main class="main-content">
-        {% block content %}
-        {% endblock %}
-    </main>
-
-    <footer>
-        <p>&copy; 2024 Genius Web Site</p>
-    </footer>
+</script>
 </body>
 </html>

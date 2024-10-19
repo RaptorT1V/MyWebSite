@@ -3,60 +3,23 @@
 {% block content %}
   <h2 style="color: red">Login</h2>
 
+   <!-- Всплывающее сообщение -->
   <div id="popup-message" class="popup-message"></div>
 
   <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Login</button>
   </form>
 
   <h2 style="color: red">Login</h2>
 
   <script>
-    function showPopupMessage(message) {
-        const popup = document.getElementById('popup-message');
-        popup.textContent = message;
-
-        if (message.trim() !== "") {
-            popup.classList.add('show');
-            setTimeout(() => {
-                popup.classList.remove('show');
-            }, 3000);
-        }
-    }
-
-    {% if error %}
-    showPopupMessage("{{ error }}");
-    {% endif %}
-
-    const form = document.querySelector('form');
-    const button = form.querySelector('button');
-
-    form.addEventListener('input', function () {
-        const allFieldsFilled = [...form.elements].every(input => input.value);
-        if (allFieldsFilled) {
-            button.classList.add('active');
-        } else {
-            button.classList.remove('active');
-        }
-    });
-
-    window.addEventListener('DOMContentLoaded', function () {
-        const messageBox = document.getElementById('popup-message');
-
-        if (messageBox && messageBox.textContent.trim() !== "") {
-            messageBox.classList.add('show');
-
-            setTimeout(function () {
-                messageBox.classList.remove('show');
-
-                setTimeout(function () {
-                    messageBox.remove();
-                }, 500);
-            }, 5000);
-        }
+    document.addEventListener('DOMContentLoaded', function() { // пришлось добавить эту строчку, чтобы код с вызовом showPopupMessage() выполнялся только после полной загрузки документа, иначе не будет работать
+        // Показываем сообщение об ошибке, если есть
+        {% if form.errors %}
+        showPopupMessage("Ты даже не можешь войти? What a shame!", 'bad');
+        {% endif %}
     });
   </script>
-
 {% endblock %}
