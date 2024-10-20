@@ -1,10 +1,7 @@
 from django.contrib import messages
-from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
+from django.shortcuts import render, redirect
 from .forms import CustomUserCreationForm, CustomAuthenticationForm
-from django_ratelimit.decorators import ratelimit
-from django.contrib.auth.hashers import check_password
-import logging
 
 
 def register(request):
@@ -23,26 +20,21 @@ def register(request):
     return render(request, 'users/register.html', {'form': form})
 
 
-@ratelimit(key='ip', rate='5/m', method='POST', block=False)
-def user_login(request):
+def login_view(request):
     if request.method == 'POST':
-        was_limited = getattr(request, 'limits', False)
-        if was_limited:
-            form = CustomAuthenticationForm()
-            return render(request, 'users/login.html', {
-                'form': form,
-                'error': 'Слишком много попыток, чел! Try again in 10 seconds.'
-            })
-
-        form = CustomAuthenticationForm(data=request.POST)
+        form = CustomAuthenticationForm(request, data=request.POST)
         if form.is_valid():
-            login(request, form.cleaned_data['user'])
-            return redirect('user_profile')
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                messages.success(request, f'Welcome back, {username}!')
+                return redirect('home')  # редирект на домашнюю страницу
+            else:
+                messages.error(request, 'Invalid username or password. Please try again.')
         else:
-            return render(request, 'users/login.html', {
-                'form': form,
-                'error': 'У тебя реквизиты для входа -- инвалиды!'
-            })
+            messages.error(request, 'Form is invalid. Please correct the errors below.')
     else:
         form = CustomAuthenticationForm()
 

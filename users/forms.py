@@ -34,32 +34,24 @@ class CustomUserCreationForm(UserCreationForm):
         return phone
 
 
-class CustomAuthenticationForm(forms.Form):
-    username_or_email = forms.CharField(label='Username or Email', max_length=255)
-    password = forms.CharField(widget=forms.PasswordInput)
+class CustomAuthenticationForm(AuthenticationForm):
+    username = forms.CharField(label='Username', required=True)
+    password = forms.CharField(label='Password', widget=forms.PasswordInput, required=True)
+
+    class Meta:
+        fields = ['username', 'password']
 
     def clean(self):
-        username_or_email = self.cleaned_data.get('username_or_email')
+        username = self.cleaned_data.get('username')
         password = self.cleaned_data.get('password')
-
-        if '@' in username_or_email:
-            user = CustomUser.objects.filter(email=username_or_email).first()
-            if not user:
-                raise forms.ValidationError(
-                    mark_safe('Такого e-mail не существует! Хотите <a href="{}">зарегистрироваться</a>?'.format(reverse('register')))
-                )
-            username = user.username
-        else:
-            user = CustomUser.objects.filter(username=username_or_email).first()
-            if not user:
-                raise forms.ValidationError(
-                    mark_safe('Такого имени не существует! Хотите <a href="{}">зарегистрироваться</a>?'.format(reverse('register')))
-                )
-            username = username_or_email
 
         user = authenticate(username=username, password=password)
         if user is None:
-            raise forms.ValidationError('Чувак, твои login credentials получили инвалидность')
+            if not CustomUser.objects.filter(username=username).exists():
+                raise forms.ValidationError(
+                    mark_safe('Такого имени не существует! Хотите <a href="{}">зарегистрироваться</a>?'.format(reverse('register')))
+                )
+            raise forms.ValidationError('Чувак, твои login credentials получили инвалидность! Проверь правильность пароля')
 
         self.cleaned_data['user'] = user
         return self.cleaned_data
