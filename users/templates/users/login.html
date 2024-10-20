@@ -16,9 +16,8 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function() { // пришлось добавить эту строчку, чтобы код с вызовом showPopupMessage() выполнялся только после полной загрузки документа, иначе не будет работать
-        // Показываем сообщение об ошибке, если есть
         {% if form.errors %}
-        showPopupMessage("Ты даже не можешь войти? What a shame!", 'bad');
+        showPopupMessage("Ты даже не можешь войти? What a shame!", 'error');
         {% endif %}
     });
   </script>

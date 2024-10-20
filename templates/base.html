@@ -19,8 +19,7 @@
     </a>
     <div class="auth-links">
         {% if user.is_authenticated %}
-        <span>Welcome, {{ user.username }}</span>
-        <a href="{% url 'logout' %}">Log out</a>
+        <span>Welcome, {{ user.username }}</span> / <a href="{% url 'logout' %}">Log out</a>
         {% else %}
         <a href="{% url 'register' %}">Register</a> / <a href="{% url 'login' %}">Log in</a>
         {% endif %}
@@ -56,7 +55,9 @@
 <script>
     // Показываем сообщение, если оно есть
     {% if messages %}
-    showPopupMessage("{% for message in messages %}{{ message }}{% endfor %}", 'good');
+    {% for message in messages %}
+    showPopupMessage("{{ message }}", "{{ message.tags }}");
+    {% endfor %}
     {% endif %}
 </script>
 </body>
