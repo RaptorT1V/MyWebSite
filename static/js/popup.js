@@ -28,7 +28,7 @@ function showPopupMessage(message, messageType = 'success') {
         popup.classList.add('show');
         setTimeout(() => {
             popup.classList.remove('show');
-        }, 2750);
+        }, 2500);
     }
 }
 
@@ -40,7 +40,7 @@ window.addEventListener('DOMContentLoaded', function () {
             messageBox.classList.remove('show');
             setTimeout(function () {
                 messageBox.remove();
-            }, 275);
-        }, 2750);
+            }, 250);
+        }, 2500);
     }
 });

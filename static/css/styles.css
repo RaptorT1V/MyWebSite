@@ -173,17 +173,17 @@ nav {
 }
 
 .popup-message-warning {
-    background-color: #fcf8e3;
+    background-color: #ffe0a3;
     color: #8a6d3b;
 }
 
 .popup-message-info {
-    background-color: #d9edf7;
-    color: #31708f;
+    background-color: #add8f7;
+    color: #2e4e5e;
 }
 
 .popup-message-debug {
-    background-color: #f2f2f2;
+    background-color: #f0fcfc;
     color: #333333;
 }
 

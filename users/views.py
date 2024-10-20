@@ -42,5 +42,7 @@ def login_view(request):
 
 
 def user_logout(request):
+    username = request.user.username
     logout(request)
+    messages.info(request, f"Вы вышли из системы. Прощайте, {username}!")
     return redirect('home')
