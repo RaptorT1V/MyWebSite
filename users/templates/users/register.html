@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2 style="color: red">Register</h2>
+  <h2 class="h2-left">Register</h2>
 
   <!-- Всплывающее сообщение -->
   <div id="popup-message" class="popup-message"></div>
@@ -45,7 +45,7 @@
     {% endif %}
   </form>
 
-  <h2 style="color: red">Register</h2>
+  <h2 class="h2-right">Register</h2>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() { // пришлось добавить эту строчку, чтобы код с вызовом showPopupMessage() выполнялся только после полной загрузки документа, иначе не будет работать

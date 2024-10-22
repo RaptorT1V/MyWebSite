@@ -17,6 +17,38 @@ header {
     position: relative;
 }
 
+/* Анимация заголовков .h2-left и .h2-right */
+@keyframes moveRightInfinite {
+    0% { transform: translateX(15%); }
+    50% { transform: translateX(180%); }
+    100% { transform: translateX(15%); }
+}
+
+@keyframes moveLeftInfinite {
+    0% { transform: translateX(-15%); }
+    50% { transform: translateX(-180%); }
+    100% { transform: translateX(-15%); }
+}
+
+.h2-left {
+    display: inline-block;
+    white-space: nowrap;
+    animation: moveRightInfinite 8s linear infinite;
+    color: red;
+    font-size: 2rem;
+    overflow: hidden;
+}
+
+.h2-right {
+    display: inline-block;
+    white-space: nowrap;
+    animation: moveLeftInfinite 8s linear infinite;
+    color: red;
+    font-size: 2rem;
+    overflow: hidden;
+}
+
+/* Блок с register и log in */
 .auth-links {
     position: absolute;
     right: 20px;
@@ -24,13 +56,67 @@ header {
 }
 
 .auth-links a {
-    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    color: #f8f9fa;
+    background-color: #343a40;
+    padding: 4px 8px;
+    margin: 0px 5px;
+    border-radius: 5px;
     text-decoration: none;
-    margin: 0 10px;
+    transition:
+        background-color 0.3s ease,
+        font-weight 0.3s ease,
+        color 0.3s ease,
+        text-decoration 0.3s ease;
 }
 
 .auth-links a:hover {
+    background-color: #495057;
+    font-weight: 600;
+    color: #fcf0b3;
     text-decoration: underline;
+}
+
+/* Анимация юзернейма */
+@keyframes blink-hover {
+  70% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes fade-hover {
+  40% {
+    opacity: 0.8;
+  }
+  42% {
+    opacity: 0.1;
+  }
+  43% {
+    opacity: 0.8;
+  }
+  45% {
+    opacity: 0.1;
+  }
+  46% {
+    opacity: 0.8;
+  }
+}
+
+.username {
+    font-family: 'League Script', Helvetica, Arial, sans-serif;
+    margin: 0 auto;
+    text-align: center;
+    color: #ccf;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+    background: none;
+}
+
+.username:hover {
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5), 0 0 10px #fff, 0 0 5px #7d26cd, 0 0 25px #7d26cd;
+    animation: blink-hover 1.5s infinite ease-in-out, fade-hover 3s infinite;
+    color: #0602d1;
 }
 
 nav {
@@ -250,7 +336,6 @@ button:hover {
     margin-right: 20px;
 }
 
-/* Footer */
 footer {
     background-color: #333;
     color: white;
