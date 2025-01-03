@@ -49,9 +49,11 @@ class CustomAuthenticationForm(AuthenticationForm):
         if user is None:
             if not CustomUser.objects.filter(username=username).exists():
                 raise forms.ValidationError(
-                    mark_safe('Такого имени не существует! Хотите <a href="{}">зарегистрироваться</a>?'.format(reverse('register')))
+                    mark_safe('Такого имени не существует! Хотите <a href="{}">зарегистрироваться</a>?'.format(
+                        reverse('register')))
                 )
-            raise forms.ValidationError('Чувак, твои login credentials получили инвалидность! Проверь правильность пароля')
+            raise forms.ValidationError(
+                'Чувак, твои login credentials получили инвалидность! Проверь правильность пароля')
 
         self.cleaned_data['user'] = user
         return self.cleaned_data

@@ -29,12 +29,12 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                messages.success(request, f'Welcome back, {username}!')
-                return redirect('home')  # редирект на домашнюю страницу
+                messages.success(request, f'С возвращением, {username}!')
+                return redirect('home')  # redirect на домашнюю страницу
             else:
-                messages.error(request, 'Invalid username or password. Please try again.')
+                messages.error(request, 'Твой username или password -- инвалид! Please try again.')
         else:
-            messages.error(request, 'Form is invalid. Please correct the errors below.')
+            messages.error(request, 'У нас форма -- invalid! Please correct the errors below.')
     else:
         form = CustomAuthenticationForm()
 

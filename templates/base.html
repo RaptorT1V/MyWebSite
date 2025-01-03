@@ -5,17 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Genius Web Site{% endblock %}</title>
     {% load static %}
+
+    <!-- Общие стили (только базовые) -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
     <link rel="icon" href="{% static 'img/icons/favicon2.ico' %}">
+
+    {% block extra_css %}{% endblock %} </head>
     {% block extra_head %}
-    <!-- Для дополнительных стилей или скриптов -->
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     {% endblock %}
-</head>
 <body>
 <header>
     <a href="/">
-        <img src="/static/img/logos/test5.png" alt="Logo" class="logo">
+        <img src="{% static 'img/logos/test5.png' %}" alt="Logo" class="logo">
     </a>
     <div class="auth-links">
         {% if user.is_authenticated %}
@@ -51,13 +54,17 @@
     <p>&copy; 2024 Genius Web Site</p>
 </footer>
 
-<script src="{% static 'js/popup.js' %}"></script>
+<!-- Общие скрипты (те, что нужны на многих страницах) -->
+<script src="{% static 'js/script.js' %}"></script>
+
+{% block extra_js %}{% endblock %}
+
 <script>
-    // Показываем сообщение, если оно есть
+    // Показываем сообщение, если оно есть (этот скрипт можно оставить тут или перенести в общий js/script.js, если он нужен на всех страницах с сообщениями)
     {% if messages %}
-    {% for message in messages %}
-    showPopupMessage("{{ message }}", "{{ message.tags }}");
-    {% endfor %}
+        {% for message in messages %}
+            showPopupMessage("{{ message }}", "{{ message.tags }}");
+        {% endfor %}
     {% endif %}
 </script>
 </body>

@@ -17,65 +17,157 @@ header {
     position: relative;
 }
 
-/* Анимация заголовков .h2-left и .h2-right */
-@keyframes moveRightInfinite {
-    0% { transform: translateX(15%); }
-    50% { transform: translateX(180%); }
-    100% { transform: translateX(15%); }
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: auto;
+    width: 100%;
 }
 
-@keyframes moveLeftInfinite {
-    0% { transform: translateX(-15%); }
-    50% { transform: translateX(-180%); }
-    100% { transform: translateX(-15%); }
+
+/*
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            base.html + home.html
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+/* Контент */
+.main-content {
+    background: url('../img/start_image.png') no-repeat center center fixed;
+    background-size: cover;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.h2-left {
-    display: inline-block;
-    white-space: nowrap;
-    animation: moveRightInfinite 8s linear infinite;
-    color: red;
-    font-size: 2rem;
-    overflow: hidden;
+.main-content h1 {
+    color: white;
+    font-size: 4rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.h2-right {
-    display: inline-block;
-    white-space: nowrap;
-    animation: moveLeftInfinite 8s linear infinite;
-    color: red;
-    font-size: 2rem;
-    overflow: hidden;
+/* Сообщения */
+.messages {
+    margin: 20px auto;
+    max-width: 400px;
+    text-align: center;
 }
 
-/* Блок с register и log in */
-.auth-links {
-    position: absolute;
-    right: 20px;
-    top: 20px;
+.messages li {
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
 }
 
-.auth-links a {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 400;
-    color: #f8f9fa;
-    background-color: #343a40;
-    padding: 4px 8px;
-    margin: 0px 5px;
+.messages li.success {
+    background-color: #dff0d8;
+    color: #3c763d;
+}
+
+.messages li.error {
+    background-color: #f2dede;
+    color: #a94442;
+}
+
+/* Всплывающие сообщения */
+.popup-message {
+    padding: 15px;
     border-radius: 5px;
-    text-decoration: none;
-    transition:
-        background-color 0.3s ease,
-        font-weight 0.3s ease,
-        color 0.3s ease,
-        text-decoration 0.3s ease;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-.auth-links a:hover {
-    background-color: #495057;
-    font-weight: 600;
-    color: #fcf0b3;
-    text-decoration: underline;
+.popup-message.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.popup-message-error {
+    background-color: #f2dede;
+    color: #a94442;
+}
+
+.popup-message-success {
+    background-color: #dff0d8;
+    color: #3c763d;
+}
+
+.popup-message-warning {
+    background-color: #ffe0a3;
+    color: #8a6d3b;
+}
+
+.popup-message-info {
+    background-color: #add8f7;
+    color: #2e4e5e;
+}
+
+.popup-message-debug {
+    background-color: #f0fcfc;
+    color: #333333;
+}
+
+/* Ошибки */
+.errorlist li {
+    color: #700733;
+    font-size: 0.95rem;
+}
+
+.errorlist li strong {
+    font-weight: bold;
+    color: #d9534f;
+}
+
+/* Формы */
+form {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    margin: 50px auto;
+    max-width: 600px;
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.05rem;
+}
+
+form input {
+    display: block;
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px 0;
+}
+
+/* Кнопки */
+button {
+    padding: 10px 20px;
+    margin: 10px 0 0 5.5em;
+    justify-content: center;
+    text-align: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-color: #ffffe5;
+}
+
+button:disabled {
+    background-color: #ffc107;
+}
+
+button.active {
+    background-color: #007bff;
+}
+
+button:hover {
+    background-color: #a198e3;
 }
 
 /* Анимация юзернейма */
@@ -191,142 +283,80 @@ nav {
     background-color: #575757;
 }
 
-/* Контент */
-.main-content {
-    background: url('../img/start_image.png') no-repeat center center fixed;
-    background-size: cover;
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
-.main-content h1 {
-    color: white;
-    font-size: 4rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
+/*
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            login.html + register.html
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
 
-/* Сообщения */
-.messages {
-    margin: 20px auto;
-    max-width: 400px;
-    text-align: center;
-}
-
-.messages li {
-    padding: 10px;
-    border-radius: 4px;
-    margin-bottom: 10px;
-}
-
-.messages li.success {
-    background-color: #dff0d8;
-    color: #3c763d;
-}
-
-.messages li.error {
-    background-color: #f2dede;
-    color: #a94442;
-}
-
-/* Всплывающие сообщения */
-.popup-message {
-    padding: 15px;
-    border-radius: 5px;
-    position: fixed;
-    top: 20px;
+/* Блок с register и login */
+.auth-links {
+    position: absolute;
     right: 20px;
-    z-index: 1000;
-    opacity: 0;
-    transform: translateY(-20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    top: 20px;
 }
 
-.popup-message.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.popup-message-error {
-    background-color: #f2dede;
-    color: #a94442;
-}
-
-.popup-message-success {
-    background-color: #dff0d8;
-    color: #3c763d;
-}
-
-.popup-message-warning {
-    background-color: #ffe0a3;
-    color: #8a6d3b;
-}
-
-.popup-message-info {
-    background-color: #add8f7;
-    color: #2e4e5e;
-}
-
-.popup-message-debug {
-    background-color: #f0fcfc;
-    color: #333333;
-}
-
-/* Ошибки */
-.errorlist li {
-    color: #700733;
-    font-size: 0.95rem;
-}
-
-.errorlist li strong {
-    font-weight: bold;
-    color: #d9534f;
-}
-
-/* Формы */
-form {
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 20px;
-    margin: 50px auto;
-    max-width: 400px;
-    width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.auth-links a {
     font-family: 'Open Sans', sans-serif;
-    font-size: 1.05rem;
+    font-weight: 400;
+    color: #f8f9fa;
+    background-color: #343a40;
+    padding: 4px 8px;
+    margin: 0px 5px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition:
+        background-color 0.3s ease,
+        font-weight 0.3s ease,
+        color 0.3s ease,
+        text-decoration 0.3s ease;
 }
 
-form input {
-    display: block;
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin: 10px 0;
+.auth-links a:hover {
+    background-color: #495057;
+    font-weight: 600;
+    color: #fcf0b3;
+    text-decoration: underline;
 }
 
-/* Кнопки */
-button {
-    padding: 10px 20px;
-    margin: 10px 0 0 5.5em;
-    justify-content: center;
-    text-align: center;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    background-color: #ffffe5;
+/* Анимация заголовков .h2-left и .h2-right в login и register */
+@keyframes moveRightInfinite {
+    0% { transform: translateX(15%); }
+    50% { transform: translateX(160%); }
+    100% { transform: translateX(15%); }
 }
 
-button:disabled {
-    background-color: #ffc107;
+@keyframes moveLeftInfinite {
+    0% { transform: translateX(-15%); }
+    50% { transform: translateX(-160%); }
+    100% { transform: translateX(-15%); }
 }
 
-button.active {
-    background-color: #007bff;
+.h2-left {
+    display: inline-block;
+    white-space: nowrap;
+    animation: moveRightInfinite 6s linear infinite;
+    color: red;
+    font-size: 2rem;
+    overflow: hidden;
 }
 
-button:hover {
-    background-color: #a198e3;
+.h2-right {
+    display: inline-block;
+    white-space: nowrap;
+    animation: moveLeftInfinite 6s linear infinite;
+    color: red;
+    font-size: 2rem;
+    overflow: hidden;
 }
+
+
+/*
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            profile.html
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
 
 /* Логотип */
 .logo {
@@ -336,11 +366,214 @@ button:hover {
     margin-right: 20px;
 }
 
-footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    margin-top: auto;
+/* Профиль */
+.profile-container {
     width: 100%;
+    padding: 40px;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.profile-info {
+    margin-left: 20px;
+    padding-bottom: 20px;
+}
+
+.avatar-section {
+    margin-right: 20px;
+    padding-bottom: 20px;
+    text-align: left;
+}
+
+.avatar-container {
+    position: relative;
+    display: inline-block;
+}
+
+.avatar-overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 50%;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+}
+
+.avatar-container:hover .avatar-overlay {
+    display: flex;
+}
+
+.avatar-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: all 0.3s ease;
+    border: 2px solid #ddd;
+}
+
+.icon {
+    color: white;
+    font-size: 18px;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    background-color: transparent;
+    outline: none;
+    border: none;
+}
+
+.icon-upload-input {
+    display: none;
+}
+
+.icon-delete-form, .icon-upload-form {
+    margin: 0;
+    border: none;
+    padding: 0;
+}
+
+.icon-upload {
+    color: white;
+    font-size: 18px;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.icon-delete, .icon-zoom {
+    background-color: transparent;
+    padding: 4px;
+}
+
+/* Позиционирование иконок */
+.icon-zoom, .icon-delete {
+    display: inline-block;
+    margin: 5px 0;
+}
+
+.icon-zoom {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-125%);
+}
+
+.icon-delete {
+    position: absolute;
+    top: 20px;
+    right: 50%;
+    transform: translateX(125%);
+}
+
+.icon-upload-form {
+    position: absolute;
+    bottom: 55px;
+    left: 90%;
+    transform: translateX(-50%);
+}
+
+/* Lightbox */
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.lightbox-content {
+    position: relative;
+}
+
+.lightbox img {
+    width: auto;
+    max-width: 90vw;
+    height: auto;
+    max-height: 90vh;
+    border: 2px solid white;
+    margin: auto;
+    object-fit: contain;
+    display: block;
+    padding: 1px;
+    background-color: black;
+}
+
+/* Смена пароля */
+.password-change-section {
+    width: 100%;
+    max-width: 400px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+#password-form-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+#password-form-container form {
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.btn-show-password-form {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Модальное окно смены пароля */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 400px;
+}
+
+.close {
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
 }

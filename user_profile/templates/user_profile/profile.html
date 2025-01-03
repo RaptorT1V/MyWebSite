@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Profile – {{ user.username }}{% endblock %}
+
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'user_profile/css/user_profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <div class="avatar-section">
+        {% if user.profile.avatar %}
+            <!-- Отображение аватара с наложением -->
+            <div class="avatar-container">
+                <img src="{{ user.profile.avatar.url }}" alt="Avatar" class="avatar-img">
+                <div class="avatar-overlay">
+                    <span class="icon icon-zoom" title="View Avatar" onclick="openLightbox('{{ user.profile.avatar.url }}')">🔍</span>
+                    <form method="POST" class="icon-delete-form">
+                        {% csrf_token %}
+                        <input type="hidden" name="delete_avatar" value="true">
+                        <span class="icon icon-delete" title="Delete Avatar" onclick="if(confirm('Are you sure you want to delete your avatar?')) this.parentElement.submit();">🗑️</span>
+                    </form>
+                    <form method="POST" enctype="multipart/form-data" class="icon-upload-form">
+                        {% csrf_token %}
+                        <input type="file" name="avatar" accept=".jpg, .jpeg, .png" id="avatar-upload" class="icon-upload-input" onchange="this.form.submit()">
+                        <label for="avatar-upload" class="icon" title="Change Avatar">➕</label>
+                    </form>
+                </div>
+            </div>
+        {% else %}
+            <!-- Отображение заглушки аватара с наложением значков -->
+            <div class="avatar-container">
+                <img src="/media/avatars/default-avatar.png" alt="Default Avatar" class="avatar-img">
+                <div class="avatar-overlay"> <!-- Наложение по умолчанию для заглушки -->
+                    <form method="POST" enctype="multipart/form-data" class="icon-upload-form">
+                        {% csrf_token %}
+                        <input type="file" name="avatar" accept=".jpg, .jpeg, .png" id="avatar-upload" class="icon-upload-input" onchange="this.form.submit()">
+                        <label for="avatar-upload" class="icon" title="Add Avatar">➕</label>
+                    </form>
+                </div>
+            </div>
+        {% endif %}
+        <h2>{{ user.username }}</h2>
+    </div>
+
+    <div class="profile-info">
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Phone:</strong> {{ user.phone }}</p>
+        <p><strong>Last Login:</strong> {{ user.last_login }}</p>
+        <p><strong>Registration Date:</strong> {{ user.date_joined|date:"d F Y, H:i" }}</p>
+    </div>
+
+    <div class="password-change-section">
+        <button id="show-password-modal" class="btn-show-password-form">Change Password</button>
+    </div>
+
+    <div id="password-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Change Password</h2>
+            <form method="POST">
+                {% csrf_token %}
+                {{ password_form.as_p }}
+                <button type="submit" class="btn-save-password">Save Password</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox" style="display:none;">
+    <div class="lightbox-content">
+        <img id="lightbox-img" src="#" alt="Full-size Avatar">
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+  {{ block.super }}
+  <script src="{% static 'user_profile/js/script.js' %}"></script>
+{% endblock %}
