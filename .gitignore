@@ -1,0 +1,52 @@
+# Virtual Environment
+venv/
+.venv/
+env/
+.env
+
+# Byte-compiled / Optimized
+__pycache__/
+*.pyc
+*.pyo
+    # Windows
+*.pyd
+    # Linux / macOS
+*.so
+    # Executables
+*.exe
+    # DLL files
+*.dll
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# IDE specific
+.idea/
+.vscode/
+*.iml
+
+# Logs
+*.log
+
+# Django specifis
+migrations/
+static_collected/
+staticfiles/
+db.sqlite3
+db.sqlite3-journal
+
+# Dependencies
+*.egg
+*.egg-info/
+*.whl
+*.tar.gz
+
+# Local settings (if present)
+local_settings.py
+
+# Secret keys and tokens (IMPORTANT!)
+secrets.json
+credentials.json

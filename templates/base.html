@@ -7,7 +7,7 @@
     {% load static %}
 
     <!-- Общие стили (только базовые) -->
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
     <link rel="icon" href="{% static 'img/icons/favicon2.ico' %}">
 
     {% block extra_css %}{% endblock %} </head>
@@ -55,12 +55,12 @@
 </footer>
 
 <!-- Общие скрипты (те, что нужны на многих страницах) -->
-<script src="{% static 'js/script.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
 
 {% block extra_js %}{% endblock %}
 
 <script>
-    // Показываем сообщение, если оно есть (этот скрипт можно оставить тут или перенести в общий js/script.js, если он нужен на всех страницах с сообщениями)
+    // Показываем сообщение, если оно есть (этот скрипт можно оставить тут или перенести в общий js/main.js, если он нужен на всех страницах с сообщениями)
     {% if messages %}
         {% for message in messages %}
             showPopupMessage("{{ message }}", "{{ message.tags }}");
