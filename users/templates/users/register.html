@@ -1,10 +1,15 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
+{% block title %}Register{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'users/css/style.css' %}">
+{% endblock %}
+
 {% block content %}
   <h2 class="h2-left">Register</h2>
-
-  <!-- Всплывающее сообщение -->
-  <div id="popup-message" class="popup-message"></div>
 
   <form method="post">
     {% csrf_token %}

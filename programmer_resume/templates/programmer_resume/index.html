@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %}Programmer Resume{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'programmer_resume/css/style.css' %}">
+{% endblock %}
 
 {% block content %}
 <h1>My Programmer Resume</h1>

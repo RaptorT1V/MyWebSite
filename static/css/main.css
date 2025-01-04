@@ -27,11 +27,171 @@ footer {
 }
 
 
+
 /*
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            base.html + home.html
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+- - - - - - - - - - - - - - - -
+    base.html + home.html
+- - - - - - - - - - - - - - - -
 */
+
+
+
+/* Логотип сайта на вкладке браузера */
+.logo {
+    width: 9em;
+    height: 3em;
+    float: left;
+    margin-right: 20px;
+}
+
+
+/* Кнопочки "register" и "login" в header'е */
+.auth-links {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
+.auth-links a {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    color: #f8f9fa;
+    background-color: #343a40;
+    padding: 4px 8px;
+    margin: 0px 5px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition:
+        background-color 0.3s ease,
+        font-weight 0.3s ease,
+        color 0.3s ease,
+        text-decoration 0.3s ease;
+}
+
+.auth-links a:hover {
+    background-color: #495057;
+    font-weight: 600;
+    color: #fcf0b3;
+    text-decoration: underline;
+}
+
+
+/* Стильное оформление username'а в header'е */
+.username {
+    font-family: 'League Script', Helvetica, Arial, sans-serif;
+    margin: 0 auto;
+    text-align: center;
+    color: #ccf;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+    background: none;
+}
+
+.username:hover {
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5), 0 0 10px #fff, 0 0 5px #7d26cd, 0 0 25px #7d26cd;
+    animation: blink-hover 1.5s infinite ease-in-out, fade-hover 3s infinite;
+    color: #0602d1;
+}
+
+/* Крутая анимация username'а */
+@keyframes blink-hover {
+  70% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes fade-hover {
+  40% {
+    opacity: 0.8;
+  }
+  42% {
+    opacity: 0.1;
+  }
+  43% {
+    opacity: 0.8;
+  }
+  45% {
+    opacity: 0.1;
+  }
+  46% {
+    opacity: 0.8;
+  }
+}
+
+
+/* Navigation bar & menu в header'е */
+nav {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+}
+
+.menu li {
+    position: relative;
+}
+
+.menu li a {
+    color: white;
+    text-decoration: none;
+    padding: 15px 20px;
+    font-size: 1.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.menu li a:hover {
+    background-color: #555;
+    border-radius: 5px;
+}
+
+.menu li ul {
+    display: none;
+    position: absolute;
+    background-color: rgba(68, 68, 68, 0.9);
+    padding: 5px;
+    list-style: none;
+    top: calc(100% + 10px);
+    left: 0;
+    border-radius: 2px;
+    min-width: 100px;
+    z-index: 1000;
+}
+
+.menu li:hover ul {
+    display: block;
+    animation: scaleUp 0.3s ease forwards;
+}
+
+.menu li ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+}
+
+.menu li ul li a:hover {
+    background-color: #575757;
+}
+
+/* Анимация для подменю */
+@keyframes scaleUp {
+    0% {
+        opacity: 0;
+        transform: scaleY(0);
+    }
+    100% {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+}
+
 
 /* Контент */
 .main-content {
@@ -49,28 +209,6 @@ footer {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-/* Сообщения */
-.messages {
-    margin: 20px auto;
-    max-width: 400px;
-    text-align: center;
-}
-
-.messages li {
-    padding: 10px;
-    border-radius: 4px;
-    margin-bottom: 10px;
-}
-
-.messages li.success {
-    background-color: #dff0d8;
-    color: #3c763d;
-}
-
-.messages li.error {
-    background-color: #f2dede;
-    color: #a94442;
-}
 
 /* Всплывающие сообщения */
 .popup-message {
@@ -115,16 +253,51 @@ footer {
     color: #333333;
 }
 
+
+
+/*
+- - - - - - - - - - - - - - - -
+  Встроенные в Django классы
+- - - - - - - - - - - - - - - -
+*/
+
+
+
+/* Сообщения */
+.messages {
+    margin: 20px auto;
+    max-width: 400px;
+    text-align: center;
+}
+
+.messages li {
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.messages li.success {
+    background-color: #dff0d8;
+    color: #3c763d;
+}
+
+.messages li.error {
+    background-color: #f2dede;
+    color: #a94442;
+}
+
+
 /* Ошибки */
 .errorlist li {
-    color: #700733;
+    color: #b80425;
     font-size: 0.95rem;
 }
 
 .errorlist li strong {
     font-weight: bold;
-    color: #d9534f;
+    color: #e35300;
 }
+
 
 /* Формы */
 form {
@@ -145,6 +318,7 @@ form input {
     padding: 10px;
     margin: 10px 0;
 }
+
 
 /* Кнопки */
 button {
@@ -168,412 +342,4 @@ button.active {
 
 button:hover {
     background-color: #a198e3;
-}
-
-/* Анимация юзернейма */
-@keyframes blink-hover {
-  70% {
-    opacity: 0.7;
-  }
-}
-
-@keyframes fade-hover {
-  40% {
-    opacity: 0.8;
-  }
-  42% {
-    opacity: 0.1;
-  }
-  43% {
-    opacity: 0.8;
-  }
-  45% {
-    opacity: 0.1;
-  }
-  46% {
-    opacity: 0.8;
-  }
-}
-
-.username {
-    font-family: 'League Script', Helvetica, Arial, sans-serif;
-    margin: 0 auto;
-    text-align: center;
-    color: #ccf;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
-    transition: all 0.3s ease;
-    background: none;
-}
-
-.username:hover {
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5), 0 0 10px #fff, 0 0 5px #7d26cd, 0 0 25px #7d26cd;
-    animation: blink-hover 1.5s infinite ease-in-out, fade-hover 3s infinite;
-    color: #0602d1;
-}
-
-nav {
-    text-align: center;
-    margin-top: 15px;
-}
-
-.menu {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: 40px;
-    justify-content: center;
-}
-
-.menu li {
-    position: relative;
-}
-
-.menu li a {
-    color: white;
-    text-decoration: none;
-    padding: 15px 20px;
-    font-size: 1.5rem;
-    transition: background-color 0.3s ease;
-}
-
-.menu li a:hover {
-    background-color: #555;
-    border-radius: 5px;
-}
-
-/* Анимация для подменю */
-@keyframes scaleUp {
-    0% {
-        opacity: 0;
-        transform: scaleY(0);
-    }
-    100% {
-        opacity: 1;
-        transform: scaleY(1);
-    }
-}
-
-.menu li ul {
-    display: none;
-    position: absolute;
-    background-color: rgba(68, 68, 68, 0.9);
-    padding: 5px;
-    list-style: none;
-    top: calc(100% + 10px);
-    left: 0;
-    border-radius: 2px;
-    min-width: 100px;
-    z-index: 1000;
-}
-
-.menu li:hover ul {
-    display: block;
-    animation: scaleUp 0.3s ease forwards;
-}
-
-.menu li ul li a {
-    color: white;
-    text-decoration: none;
-    display: block;
-    padding: 10px;
-}
-
-.menu li ul li a:hover {
-    background-color: #575757;
-}
-
-
-/*
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            login.html + register.html
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-*/
-
-/* Блок с register и login */
-.auth-links {
-    position: absolute;
-    right: 20px;
-    top: 20px;
-}
-
-.auth-links a {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 400;
-    color: #f8f9fa;
-    background-color: #343a40;
-    padding: 4px 8px;
-    margin: 0px 5px;
-    border-radius: 5px;
-    text-decoration: none;
-    transition:
-        background-color 0.3s ease,
-        font-weight 0.3s ease,
-        color 0.3s ease,
-        text-decoration 0.3s ease;
-}
-
-.auth-links a:hover {
-    background-color: #495057;
-    font-weight: 600;
-    color: #fcf0b3;
-    text-decoration: underline;
-}
-
-/* Анимация заголовков .h2-left и .h2-right в login и register */
-@keyframes moveRightInfinite {
-    0% { transform: translateX(15%); }
-    50% { transform: translateX(160%); }
-    100% { transform: translateX(15%); }
-}
-
-@keyframes moveLeftInfinite {
-    0% { transform: translateX(-15%); }
-    50% { transform: translateX(-160%); }
-    100% { transform: translateX(-15%); }
-}
-
-.h2-left {
-    display: inline-block;
-    white-space: nowrap;
-    animation: moveRightInfinite 6s linear infinite;
-    color: red;
-    font-size: 2rem;
-    overflow: hidden;
-}
-
-.h2-right {
-    display: inline-block;
-    white-space: nowrap;
-    animation: moveLeftInfinite 6s linear infinite;
-    color: red;
-    font-size: 2rem;
-    overflow: hidden;
-}
-
-
-/*
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            profile.html
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-*/
-
-/* Логотип */
-.logo {
-    width: 9em;
-    height: 3em;
-    float: left;
-    margin-right: 20px;
-}
-
-/* Профиль */
-.profile-container {
-    width: 100%;
-    padding: 40px;
-    background-color: #f4f4f4;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-}
-
-.profile-info {
-    margin-left: 20px;
-    padding-bottom: 20px;
-}
-
-.avatar-section {
-    margin-right: 20px;
-    padding-bottom: 20px;
-    text-align: left;
-}
-
-.avatar-container {
-    position: relative;
-    display: inline-block;
-}
-
-.avatar-overlay {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    border-radius: 50%;
-    justify-content: space-around;
-    align-items: center;
-    flex-direction: column;
-}
-
-.avatar-container:hover .avatar-overlay {
-    display: flex;
-}
-
-.avatar-img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    transition: all 0.3s ease;
-    border: 2px solid #ddd;
-}
-
-.icon {
-    color: white;
-    font-size: 18px;
-    padding: 0;
-    margin: 0;
-    cursor: pointer;
-    background-color: transparent;
-    outline: none;
-    border: none;
-}
-
-.icon-upload-input {
-    display: none;
-}
-
-.icon-delete-form, .icon-upload-form {
-    margin: 0;
-    border: none;
-    padding: 0;
-}
-
-.icon-upload {
-    color: white;
-    font-size: 18px;
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
-    background-color: transparent !important;
-    padding: 0 !important;
-    margin: 0 !important;
-}
-
-.icon-delete, .icon-zoom {
-    background-color: transparent;
-    padding: 4px;
-}
-
-/* Позиционирование иконок */
-.icon-zoom, .icon-delete {
-    display: inline-block;
-    margin: 5px 0;
-}
-
-.icon-zoom {
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-125%);
-}
-
-.icon-delete {
-    position: absolute;
-    top: 20px;
-    right: 50%;
-    transform: translateX(125%);
-}
-
-.icon-upload-form {
-    position: absolute;
-    bottom: 55px;
-    left: 90%;
-    transform: translateX(-50%);
-}
-
-/* Lightbox */
-.lightbox {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.lightbox-content {
-    position: relative;
-}
-
-.lightbox img {
-    width: auto;
-    max-width: 90vw;
-    height: auto;
-    max-height: 90vh;
-    border: 2px solid white;
-    margin: auto;
-    object-fit: contain;
-    display: block;
-    padding: 1px;
-    background-color: black;
-}
-
-/* Смена пароля */
-.password-change-section {
-    width: 100%;
-    max-width: 400px;
-    margin: 30px auto;
-    padding: 20px;
-}
-
-#password-form-container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
-}
-
-#password-form-container form {
-    max-width: 300px;
-    margin: 0 auto;
-}
-
-.btn-show-password-form {
-    display: block;
-    margin: 0 auto;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-/* Модальное окно смены пароля */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5);
-}
-
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border-radius: 8px;
-    width: 80%;
-    max-width: 400px;
-}
-
-.close {
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
 }

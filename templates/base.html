@@ -10,7 +10,8 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
     <link rel="icon" href="{% static 'img/icons/favicon2.ico' %}">
 
-    {% block extra_css %}{% endblock %} </head>
+    {% block extra_css %} {% endblock %}
+</head>
     {% block extra_head %}
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
@@ -42,13 +43,13 @@
     </nav>
 </header>
 
-<!-- Всплывающее сообщение -->
-<div id="popup-message" class="popup-message"></div>
-
 <main class="main-content">
     {% block content %}
     {% endblock %}
 </main>
+
+<!-- Всплывающее сообщение -->
+<div id="popup-message" class="popup-message"></div>
 
 <footer>
     <p>&copy; 2024 Genius Web Site</p>

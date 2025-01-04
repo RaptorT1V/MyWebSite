@@ -20,6 +20,7 @@ def user_profile_view(request):
     except Profile.DoesNotExist:
         profile = Profile.objects.create(user=request.user)
 
+    # Если пользователь загружает новый аватар
     if request.method == 'POST':
         if 'avatar' in request.FILES:
             avatar = request.FILES['avatar']
@@ -33,22 +34,23 @@ def user_profile_view(request):
         elif 'delete_avatar' in request.POST:
             profile.avatar.delete()
             messages.success(request, 'Аватар удалён к чёртовой матери!')
-        elif 'old_password' in request.POST:
-            form = PasswordChangeForm(user=request.user, data=request.POST)
-            if form.is_valid():
-                form.save()
-                update_session_auth_hash(request, form.user)
-                messages.success(request, 'Пароль успешно изменён!')
-            else:
-                for field, errors in form.errors.items():
-                    for error in errors:
-                        if 'old_password' in field:
-                            messages.error(request, 'Чё, склероз настиг, дружище? Ты свой текущий пароль ввёл неверно!')
-                        elif 'new_password2' in field:
-                            messages.error(request, 'Чё, слепошарый? Ты хотя бы смотри, на какие клавиши нажимаешь! Новые пароли не совпадают!')
-                        else:
-                            messages.error(request, error)
+
+    # Если пользователь меняет пароль
+    if 'old_password' in request.POST:
+        form = PasswordChangeForm(user=request.user, data=request.POST)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)  # Обновляем сессию
+            messages.success(request, 'Пароль успешно изменён!')
             return redirect('user_profile')
+        else:
+            # Обработка ошибок формы
+            if form.errors.get('old_password'):
+                messages.error(request, 'Чё, склероз настиг, дружище? Ты СВОЙ ТЕКУЩИЙ ПАРОЛЬ ввёл неверно!')
+            if form.errors.get('new_password2'):
+                messages.error(request, 'Чё, слепошарый? Ты хотя бы смотри, на какие клавиши нажимаешь! НОВЫЕ ПАРОЛИ у тебя не совпадают! (ну или же ты придумал фиговый пароль)')
+            if form.errors.get('old_password') and form.errors.get('new_password2'):
+                messages.error(request, 'Ооо, хахах, ты ВООБЩЁ ВСЁ НЕПРАВИЛЬНО ввёл! И старый пароль, и новый пароль...')
     else:
         form = PasswordChangeForm(user=request.user)
 

@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
+
 {% load static %}
 
 {% block title %}Profile – {{ user.username }}{% endblock %}
 
-
 {% block extra_css %}
-    <link rel="stylesheet" type="text/css" href="{% static 'user_profile/css/user_profile.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'user_profile/css/style.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -75,7 +75,6 @@
         <img id="lightbox-img" src="#" alt="Full-size Avatar">
     </div>
 </div>
-
 {% endblock %}
 
 {% block extra_js %}
