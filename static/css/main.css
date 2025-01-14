@@ -21,7 +21,6 @@ footer {
     background-color: #333;
     color: white;
     text-align: center;
-    padding: 10px;
     margin-top: auto;
     width: 100%;
 }
@@ -342,4 +341,24 @@ button.active {
 
 button:hover {
     background-color: #a198e3;
+}
+
+
+/* Стили для скроллбара */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }

@@ -9,17 +9,86 @@
 {% endblock %}
 
 {% block content %}
-<h1>My Programmer Resume</h1>
+<div class="resume-grid">
+    <!-- Колонка 1: GitHub и Habr -->
+    <div class="resume-column">
+        <section class="resume-section github-section">
+            <h2>GitHub Profile</h2>
+            <div class="github-content">
+                <a href="https://github.com/RaptorT1V" target="_blank" class="github-link">
+                    <img src="{% static 'programmer_resume/img/github-logo.png' %}" alt="GitHub Logo">
+                    My GitHub Profile
+                </a>
+                <div class="github-repos">
+                    <h3>Featured Repositories:</h3>
+                    <ol>
+                        <li><a href="https://github.com/RaptorT1V/rsschool-cv" target="_blank">CV</a></li>
+                        <li><a href="https://github.com/RaptorT1V/SfPTPfS" target="_blank">SfPTPfS</a></li>
+                        <li><a href="https://github.com/RaptorT1V/MyWebSite" target="_blank">Genius_WebSite</a></li>
+                    </ol>
+                </div>
+            </div>
+        </section>
 
-<h2>GitHub</h2>
-<a href="https://github.com/RaptorT1V" target="_blank">Мой GitHub</a>
+        <section class="resume-section habr-section">
+            <h2>Habr Articles</h2>
+            <div class="habr-content">
+                <a href="https://habr.com/ru/users/badcasedaily1/publications/articles/" target="_blank" class="habr-link">
+                    <img src="{% static 'programmer_resume/img/habr-logo.png' %}" alt="Habr Logo">
+                    My Habr Profile
+                </a>
+                <div class="habr-articles">
+                    <h3>Featured Articles:</h3>
+                    <ol>
+                        <li><a href="https://habr.com/ru/articles/779624/" target="_blank">Приложение для подготовки к собеседованиям по Python</a></li>
+                        <li><a href="https://habr.com/ru/articles/871606/" target="_blank">Бойтесь юзеров с Telegram Premium</a></li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+    </div>
 
-<h2>Habr</h2>
-<a href="https://habr.com/ru/users/badcasedaily1/publications/articles/" target="_blank">Мои статьи на Habr</a>
+    <!-- Колонка 2: PDF -->
+    <div class="resume-column">
+        <section class="resume-section pdf-section">
+            <h2>Academic Works</h2>
+            <div class="pdf-viewer">
+                <iframe src="{% static 'programmer_resume/docs/Курсовая работа.pdf' %}#toolbar=0" class="pdf-frame"></iframe>
+            </div>
+        </section>
+    </div>
 
-<h2>Курсовые работы</h2>
-<embed src="{% static 'docs/Курсовая работа.pdf' %}" type="application/pdf" width="600" height="400">
+    <!-- Колонка 3: Google Drive -->
+    <div class="resume-column">
+        <section class="resume-section drive-section">
+            <h2>Study Materials</h2>
+            <div class="drive-content">
+                <iframe src="https://drive.google.com/embeddedfolderview?id=1-FIwf9mh49ZcwXPFLK173wXFpr5lIkHH#list" class="drive-frame"></iframe>
+            </div>
+        </section>
+    </div>
 
-<h2>Сертификаты и дипломы</h2>
-<img src="{% static 'img/diplom2.jpg' %}" alt="Мой диплом" width="400">
+    <!-- Колонка 4: Сертификаты -->
+    <div class="resume-column">
+        <section class="resume-section certificates-section">
+            <h2>Certificates & Diplomas</h2>
+            <div class="certificates-grid">
+                <div class="certificate-card">
+                    <img src="{% static 'programmer_resume/img/diplom1.jpg' %}" alt="Certificate 1">
+                    <div class="certificate-info">
+                        <h3>Диплом лучшего саппорта</h3>
+                        <p>Было дело... Участвовал я однажды в турнире...</p>
+                    </div>
+                </div>
+                <div class="certificate-card">
+                    <img src="{% static 'programmer_resume/img/diplom2.jpg' %}" alt="Certificate 2">
+                    <div class="certificate-info">
+                        <h3>Русский медвежонок</h3>
+                        <p>В школе заработал</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
 {% endblock %}
