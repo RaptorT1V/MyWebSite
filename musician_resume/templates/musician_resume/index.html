@@ -1,11 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Musician Resume</title>
-</head>
-<body>
-    <h1>Welcome to Musician Resume</h1>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Musician Resume{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'musician_resume/css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="musician-container">
+    <!-- Левая колонка – стриминговые сервисы -->
+    <div class="streaming-services">
+        <h2>Streaming Platforms</h2>
+        {% for service in streaming_services %}
+        <a href="{{ service.url }}" class="platform-link" target="_blank">
+            <img src="{{ service.logo.url }}" alt="{{ service.name }}">
+            <span>{{ service.name }}</span>
+        </a>
+        {% endfor %}
+    </div>
+
+    <!-- Центральный блок – плеер -->
+    <div class="music-player">
+        <h1>My Music</h1>
+        <div class="player-content">
+            <div class="cover-wrapper">
+                <div class="album-cover">
+                    <div class="volume-indicator">
+                        <div class="volume-circle"></div>
+                        <span class="volume-percentage">100%</span>
+                    </div>
+                    <img id="cover-art" src="{{ tracks.0.cover.url }}" alt="Album Cover">
+                </div>
+            </div>
+            <div class="track-info">
+                <h2 id="track-title">{{ tracks.0.title }}</h2>
+                <p id="track-artist">{{ tracks.0.artist }}</p>
+            </div>
+            <div class="controls">
+                <button id="prev-track"><i class="fas fa-step-backward"></i></button>
+                <button id="play-pause"><i class="fas fa-play"></i></button>
+                <button id="next-track"><i class="fas fa-step-forward"></i></button>
+            </div>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+            <div class="time-info">
+                <span id="current-time">0:00</span>
+                <span id="duration">0:00</span>
+            </div>
+            <audio id="audio-player" preload="auto"></audio>
+        </div>
+    </div>
+
+    <!-- Правая колонка – социальные сети -->
+    <div class="social-links">
+        <h2>Social Media</h2>
+        {% for link in social_links %}
+        <a href="{{ link.url }}" class="platform-link" target="_blank">
+            <img src="{{ link.logo.url }}" alt="{{ link.name }}">
+            <span>{{ link.name }}</span>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        const tracks = {{ tracks_json|safe }};
+    </script>
+    <script src="{% static 'musician_resume/js/script.js' %}"></script>
+{% endblock %}

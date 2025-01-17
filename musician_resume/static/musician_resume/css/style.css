@@ -1,0 +1,346 @@
+/*
+- - - - - - - - - - - - - - - - - - - - - - -
+       musician_resume/index.html
+- - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+
+
+/* ========================================================== */
+/*                      Общие стили                           */
+/* ========================================================== */
+
+/* Основная структура страницы */
+.musician-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 2rem;
+    padding: 2rem;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    min-height: 80vh;
+}
+
+
+/* Стилизация заголовков */
+h1, h2 {
+    font-family: 'Playfair Display', serif;
+    color: #1a73e8;
+    text-align: center;
+    position: relative;
+    padding: 0.1rem 0.1rem 1rem 0.1rem;
+}
+
+h1 {
+    font-size: 3.5rem;
+    text-shadow: 2px 2px 4px rgba(26, 115, 232, 0.2);
+    margin: 0.5rem 1rem 1.5rem 1rem;
+}
+
+h2 {
+    font-size: 2.5rem;
+    margin: 1rem 1rem 1.5rem 1rem;
+}
+
+h1::after, h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #1a73e8, transparent);
+}
+
+
+/* ========================================================== */
+/*                       Контент                              */
+/* ========================================================== */
+
+/* Стили для боковых панелей */
+.streaming-services,
+.social-links {
+    background: white;
+    padding: 0.2rem 2rem 1rem 2rem;
+    margin: 0.3rem 0.3rem 0.3rem 0.3rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    height: fit-content;
+    width: fit-content;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+
+/* Стили для ссылок на платформы */
+.platform-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    text-decoration: none;
+    background: white;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.platform-link img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+.platform-link span {
+    font-size: 1rem;
+    color: #333;
+    font-weight: 500;
+}
+
+.platform-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-color: #1a73e8;
+}
+
+
+/* ========================================================== */
+/*                Стили для музыкального плеера               */
+/* ========================================================== */
+
+/* Стили для музыкального плеера */
+.music-player {
+    background: linear-gradient(145deg, #1a73e8, #0d47a1);
+    padding: 1rem 1.5rem 1.5rem 1.5rem;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(26, 115, 232, 0.3);
+    height: fit-content;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.music-player h1,
+.music-player h2 {
+    color: white;
+}
+
+.music-player h1::after,
+.music-player h2::after {
+    background: linear-gradient(90deg, transparent, white, transparent);
+}
+
+.player-content {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2rem 2rem 2rem 2rem;
+    border-radius: 15px;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+}
+
+
+/* Стили для обложки */
+.cover-wrapper {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+}
+
+.album-cover {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    margin: 0 auto;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.album-cover img {
+    width: 100%;
+    height: 100%;
+    border-radius: 20%;
+    object-fit: cover;
+    user-select: none;
+    -webkit-user-drag: none;
+    pointer-events: none;
+}
+
+.album-cover.muted img {
+    filter: grayscale(100%);
+}
+
+
+/* Стили для визуализатора */
+.visualizer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.visualizer-behind {
+    position: absolute;
+    top: 28.2%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 332px;
+    height: 332px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+
+/* Стили для индикатора громкости */
+.volume-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 4;
+    display: none;
+}
+
+.volume-circle {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255,255,255,0.3);
+    transition: height 0.1s;
+}
+
+.volume-percentage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 24px;
+    text-shadow: 0 0 4px rgba(0,0,0,0.5);
+}
+
+
+/* Стили для информации о треке */
+.track-info {
+    text-align: center;
+    color: white;
+    margin: 1.5rem 0;
+}
+
+.track-info h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.track-info p {
+    margin: 1rem 0.1rem 0.1rem 0.1rem;
+    opacity: 0.9;
+}
+
+
+/* Стили для кнопочек плеера */
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin: 1.5rem 0;
+}
+
+.controls button {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    cursor: pointer;
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: 50%;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.controls button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+
+/* Стили для информации о времени */
+.time-info {
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+
+/* Стили для кнопочек плеера */
+.progress-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    position: relative;
+    cursor: pointer;
+    margin: 1rem 0;
+}
+
+.progress {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: white;
+    border-radius: 2px;
+    transition: width 0.2s ease;
+}
+
+.progress-tooltip {
+    position: absolute;
+    bottom: 20px;
+    background: #fff;
+    color: #333;
+    padding: 4px 8px;
+    font-size: 0.8rem;
+    border-radius: 4px;
+    display: none;
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+
+
+/* Медиа-запросы для адаптивности */
+@media screen and (max-width: 1200px) {
+    .musician-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .streaming-services,
+    .social-links {
+        margin: 0.3rem auto 0.3rem auto;
+        width: 100%;
+        max-width: 600px;
+    }
+
+    .music-player {
+        order: 0;
+        margin: 0.3rem auto 0.3rem auto;
+        width: 100%;
+        max-width: 600px;
+    }
+}

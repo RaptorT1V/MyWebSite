@@ -18,29 +18,37 @@
     {% endblock %}
 <body>
 <header>
-    <a href="/">
-        <img src="{% static 'img/logos/test5.png' %}" alt="Logo" class="logo">
-    </a>
-    <div class="auth-links">
-        {% if user.is_authenticated %}
-        <a href="{% url 'user_profile' %}" class="username">{{ user.username }}</a> / <a href="{% url 'logout' %}">Log out</a>
-        {% else %}
-        <a href="{% url 'register' %}">Register</a> / <a href="{% url 'login' %}">Log in</a>
-        {% endif %}
+    <div class="header-container">
+        <div class="logo-container">
+            <a href="/">
+                <img src="{% static 'img/logos/test5.png' %}" alt="Logo" class="logo">
+            </a>
+        </div>
+
+        <nav aria-label="Main Navigation">
+            <ul class="menu">
+                <li><a href="#">Resume</a>
+                    <ul>
+                        <li><a href="{% url 'programmer_resume:index' %}">Programmer</a></li>
+                        <li><a href="{% url 'musician_resume:index' %}">Musician</a></li>
+                    </ul>
+                </li>
+                <li><a href="{% url 'merch:index' %}">Merch</a></li>
+                <li><a href="{% url 'forum:index' %}">Forum</a></li>
+                <li><a href="{% url 'game:index' %}">Game</a></li>
+            </ul>
+        </nav>
+
+        <div class="auth-links">
+            {% if user.is_authenticated %}
+                <a href="{% url 'user_profile' %}" class="username">{{ user.username }}</a> /
+                <a href="{% url 'logout' %}">Log out</a>
+            {% else %}
+                <a href="{% url 'register' %}">Register</a> /
+                <a href="{% url 'login' %}">Log in</a>
+            {% endif %}
+        </div>
     </div>
-    <nav aria-label="Main Navigation">
-        <ul class="menu">
-            <li><a href="#">Resume</a>
-                <ul>
-                    <li><a href="{% url 'programmer_resume:index' %}">Programmer</a></li>
-                    <li><a href="{% url 'musician_resume:index' %}">Musician</a></li>
-                </ul>
-            </li>
-            <li><a href="{% url 'merch:index' %}">Merch</a></li>
-            <li><a href="{% url 'forum:index' %}">Forum</a></li>
-            <li><a href="{% url 'game:index' %}">Game</a></li>
-        </ul>
-    </nav>
 </header>
 
 <main class="main-content">

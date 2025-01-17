@@ -13,7 +13,18 @@ header {
     background-color: #333;
     color: white;
     padding: 20px;
-    text-align: left;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    float: left;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
     position: relative;
 }
 
@@ -39,16 +50,21 @@ footer {
 .logo {
     width: 9em;
     height: 3em;
+    padding: 2px;
+    margin: 1px 1px 1px 1px;
+    display: block;
     float: left;
-    margin-right: 20px;
+}
+
+.logo-container {
+    flex: 0 0 auto;
 }
 
 
 /* Кнопочки "register" и "login" в header'е */
 .auth-links {
-    position: absolute;
-    right: 20px;
-    top: 20px;
+    flex: 0 0 auto;
+    white-space: nowrap;
 }
 
 .auth-links a {
@@ -120,17 +136,22 @@ footer {
 
 /* Navigation bar & menu в header'е */
 nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
     text-align: center;
-    margin-top: 15px;
+    margin: 0 20px;
 }
 
 .menu {
-    list-style-type: none;
-    margin: 0;
+    list-style: none;
+    margin: 0px 0px 0px 25px;
     padding: 0;
     display: flex;
     gap: 40px;
+    flex-wrap: wrap;
     justify-content: center;
+    text-align: center;
 }
 
 .menu li {
@@ -150,7 +171,7 @@ nav {
     border-radius: 5px;
 }
 
-.menu li ul {
+.menu > li > ul {
     display: none;
     position: absolute;
     background-color: rgba(68, 68, 68, 0.9);
@@ -163,7 +184,7 @@ nav {
     z-index: 1000;
 }
 
-.menu li:hover ul {
+.menu > li:hover > ul {
     display: block;
     animation: scaleUp 0.3s ease forwards;
 }
@@ -361,4 +382,24 @@ button:hover {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
+}
+
+
+/* Медиа-запросы для адаптивности */
+@media screen and (max-width: 1200px) {
+    .header-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .menu {
+        gap: 20px;
+        justify-content: center;
+    }
+
+    .auth-links {
+        position: static;
+        margin-top: 15px;
+    }
 }

@@ -164,3 +164,6 @@ LOGGING = {
         },
     },
 }
+
+# Other
+X_FRAME_OPTIONS = 'SAMEORIGIN'
