@@ -157,9 +157,10 @@
 
 /* Модальное окно смены пароля */
 .modal {
-    display: none;
+    display: flex;
     position: fixed;
     justify-content: center;
+    overflow-y: auto;
     z-index: 1000;
     left: 0;
     top: 0;
@@ -176,13 +177,15 @@
     border-radius: 8px;
     border-color: yellow;
     width: 40%;
-    max-width: 350px;
+    max-width: 90%;
+    box-sizing: border-box;
 }
 
 /* Кнопка "Сменить пароль" */
 .btn-show-password-form {
     display: block;
-    margin: 0 auto;
+    max-width: 100%;
+    margin: 0 auto 0 1rem;
     padding: 10px 20px;
     background-color: #0056b3;
     color: white;
@@ -198,6 +201,8 @@
 /* Кнопка "Сохранить пароль" */
 .btn-save-password {
     transition: background-color 0.2s;
+    max-width: 100%;
+    margin: auto;
 }
 
 .btn-save-password:hover {
@@ -280,5 +285,15 @@ h2 {
         margin-left: 0;
         margin-top: 20px;
         text-align: center;
+    }
+
+    .modal-content {
+        width: 50%;
+        max-width: 90%;
+        padding: 10px;
+    }
+
+    h2 {
+        font-size: 28px;
     }
 }
