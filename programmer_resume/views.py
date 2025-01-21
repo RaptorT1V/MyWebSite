@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.core.exceptions import ObjectDoesNotExist
 from .models import (
@@ -9,7 +10,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-
+@login_required
 def index(request):
     try:
         # Получаем данные GitHub

@@ -1,39 +1,411 @@
 /*
-- - - - - - - - - - - - - - - - - - - - - - - -
-         login.html + register.html
-- - - - - - - - - - - - - - - - - - - - - - - -
+- - - - - - - - - - - - - - - - - - - - - - - - - -
+              login_required.html
+- - - - - - - - - - - - - - - - - - - - - - - - - -
 */
 
 
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-/* Левый и правый заголовки */
-.h2-left {
-    display: inline-block;
-    white-space: nowrap;
-    animation: moveRightInfinite 6s linear infinite;
-    color: red;
-    font-size: 2rem;
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+
+/* Контейнер страницы */
+.login-required-container {
+    background-color: rgba(24, 26, 27, 0.95);
+    border-radius: 15px;
+    padding: 2.5rem;
+    max-width: 600px;
+    margin: 2rem auto;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+/* Контейнер для анимации */
+.header-animation {
+    width: 100%;
     overflow: hidden;
+    padding: 1rem 0;
+    background: linear-gradient(90deg,
+        rgba(0,0,0,0) 0%,
+        rgba(255,0,0,0.1) 25%,
+        rgba(255,0,0,0.1) 75%,
+        rgba(0,0,0,0) 100%
+    );
+}
+
+
+/* Текст предупреждения */
+.warning-text {
+    display: inline-block;
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: 'Orbitron', sans-serif;
+    color: #ff0000;
+    text-shadow:
+        0 0 10px rgba(255,0,0,0.5),
+        0 0 20px rgba(255,0,0,0.3),
+        0 0 30px rgba(255,0,0,0.2);
+    white-space: nowrap;
+    margin: 0;
+    padding: 0;
+    animation:
+        moveText 6s linear infinite,  /* Уменьшили время с 6s до 4s */
+        alertPulse 2s ease-in-out infinite;
+}
+
+/* Анимация движения текста */
+@keyframes moveText {
+    0% {
+        transform: translateX(-130%);
+    }
+    100% {
+        transform: translateX(130%);  /* Увеличили со 100% до 200% */
+    }
+}
+
+/* Анимация пульсации цвета и свечения */
+@keyframes alertPulse {
+    0%, 100% {
+        color: #ff0000;
+        text-shadow:
+            0 0 10px rgba(255,0,0,0.5),
+            0 0 20px rgba(255,0,0,0.3),
+            0 0 30px rgba(255,0,0,0.2);
+    }
+    50% {
+        color: #ff4444;
+        text-shadow:
+            0 0 20px rgba(255,0,0,0.8),
+            0 0 30px rgba(255,0,0,0.6),
+            0 0 40px rgba(255,0,0,0.4),
+            0 0 50px rgba(255,0,0,0.2);
+    }
+}
+
+
+/* Добавляем эффект мерцающей рамки */
+.login-required-container {
+    position: relative;
+}
+
+.login-required-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid transparent;
+    border-radius: 15px;
+    animation: borderPulse 4s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes borderPulse {
+    0%, 100% {
+        border-color: rgba(255,0,0,0.2);
+        box-shadow: 0 0 10px rgba(255,0,0,0.2);
+    }
+    50% {
+        border-color: rgba(255,0,0,0.8);
+        box-shadow: 0 0 20px rgba(255,0,0,0.4);
+    }
+}
+
+
+/* Контейнер сообщений */
+.message-container {
+    margin: 2rem 0;
+    padding: 1rem;
+}
+
+.main-message {
+    font-size: 1.4rem;
+    color: rgb(200, 195, 188);
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.sub-message {
+    font-size: 1.1rem;
+    color: rgb(168, 160, 149);
+    margin: 1.5rem 0rem 0rem 0rem;
+}
+
+
+/* Кнопки авторизации */
+.auth-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 0.5rem 0.5rem 0.5rem 0.5rem;
+}
+
+.auth-button {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: fit-content;
+    height: fit-content;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    font-family: 'Press Start 2P', sans-serif; /* Футуристичный шрифт */
+    letter-spacing: 1.2px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: #fff;
+    animation: pulse 2s infinite;
+    transition: all 0.3s ease;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 15px rgba(174, 76, 176, 0.5), 0 0 30px rgba(174, 76, 176, 0.3);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 25px rgba(174, 76, 176, 0.7), 0 0 50px rgba(174, 76, 176, 0.5);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 15px rgba(174, 76, 176, 0.5), 0 0 30px rgba(174, 76, 176, 0.3);
+    }
+}
+
+.auth-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 70%);
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s ease;
+    pointer-events: none;
+}
+
+.auth-button:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.login-btn {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    border-color: #4CAF50;
+    box-shadow: 0 0 15px rgba(76, 175, 80, 0.5), 0 0 30px rgba(76, 175, 80, 0.3);
+}
+
+.register-btn {
+    background: linear-gradient(135deg, #2196F3, #1976D2);
+    border-color: #2196F3;
+    box-shadow: 0 0 15px rgba(33, 150, 243, 0.5), 0 0 30px rgba(33, 150, 243, 0.3);
+}
+
+.auth-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    filter: brightness(1.2);
+}
+
+.login-btn:hover {
+    background: linear-gradient(135deg, #45a049, #4CAF50);
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.7), 0 0 40px rgba(76, 175, 80, 0.5);
+}
+
+.register-btn:hover {
+    background: linear-gradient(135deg, #1976D2, #2196F3);
+    box-shadow: 0 0 20px rgba(33, 150, 243, 0.7), 0 0 40px rgba(33, 150, 243, 0.5);
+}
+
+.button-icon {
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+    color: inherit;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .login-required-container {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+
+    .auth-buttons {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .auth-button {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+
+/*
+- - - - - - - - - - - - - - - - - - - - - - - - -
+          login.html + register.html
+- - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+
+form {
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.1); /* Прозрачный фон */
+    backdrop-filter: blur(10px); /* Размытие фона */
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Стеклянная тень */
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #fff;
+}
+
+div {
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #eee;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: calc(100% - 24px);
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    border-color: #a29bfe;
+    box-shadow: 0 0 15px rgba(162, 155, 254, 0.6);
+}
+
+button[type="submit"] {
+    background: linear-gradient(45deg, #ff9ff3, #feca57, #ff7675, #a29bfe); /* Переливающийся градиент */
+    background-size: 400% 400%;
+    color: #fff;
+    padding: 14px 30px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    animation: gradientShift 8s linear infinite; /* Анимация перелива */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden; /* Чтобы скрыть выходящий за рамки элемент */
+}
+
+@keyframes gradientShift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+}
+
+button[type="submit"]:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Эффект "волны" при наведении */
+button[type="submit"]::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: skewX(-45deg);
+    transition: left 0.5s;
+    z-index: 1; /* Убедиться, что "волна" сверху */
+}
+
+button[type="submit"]:hover::before {
+    left: 100%;
+}
+
+button[type="submit"] span {
+    position: relative; /* Чтобы текст был поверх "волны" */
+    z-index: 2;
+}
+
+
+.h2-wrapper { /* Обертка для симметричного расположения */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: absolute; /* Абсолютное позиционирование относительно родителя */
+    top: 30px; /* Настройка отступа сверху */
+    left: 0;
+    padding: 0 20px; /* Отступы по бокам */
+}
+
+.h2-left, .h2-right {
+    margin: 5rem;
+    display: block; /* Изменяем на block */
+    white-space: nowrap;
+    font-size: 2.2rem;
+    font-weight: bold;
+    text-shadow: 0 0 10px #ff3e3e, 0 0 20px #ff3e3e, 0 0 30px #ff3e3e; /* Неоновое свечение */
+    color: #fff;
+    animation-duration: 4s; /* Ускорим анимацию */
+}
+
+.h2-left {
+    animation-name: moveRightInfinite;
+    text-align: left;
+    z-index: 0;
 }
 
 .h2-right {
-    display: inline-block;
-    white-space: nowrap;
-    animation: moveLeftInfinite 6s linear infinite;
-    color: red;
-    font-size: 2rem;
-    overflow: hidden;
+    animation-name: moveLeftInfinite;
+    text-align: right;
+    z-index: 0;
 }
 
-/* Анимация заголовков .h2-left и .h2-right */
 @keyframes moveRightInfinite {
-    0% { transform: translateX(15%); }
-    50% { transform: translateX(160%); }
-    100% { transform: translateX(15%); }
+    0% { transform: translateX(50%); opacity: 0; }
+    25% { transform: translateX(100%); opacity: 1; }
+    75% { transform: translateX(-50%); opacity: 1; }
+    100% { transform: translateX(50%); opacity: 0; }
 }
 
 @keyframes moveLeftInfinite {
-    0% { transform: translateX(-15%); }
-    50% { transform: translateX(-160%); }
-    100% { transform: translateX(-15%); }
+    0% { transform: translateX(-50%); opacity: 0; }
+    25% { transform: translateX(-100%); opacity: 1; }
+    75% { transform: translateX(50%); opacity: 1; }
+    100% { transform: translateX(-50%); opacity: 0; }
 }

@@ -1,0 +1,36 @@
+body {
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+#gravity-text {
+    position: relative;
+    font-size: 4em;
+    color: white;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    user-select: none;
+    box-sizing: border-box;
+}
+
+#gravity-text span {
+    display: inline-block;
+    position: relative;
+    transition: all 0.3s ease;
+    opacity: 0;
+}
+
+#gravity-text span.active {
+    opacity: 1;
+}
+
+#gravity-text span:hover {
+    cursor: pointer;
+}
+
+@keyframes pulse {
+    0% { color: #fff; }
+    50% { color: #ff00ff; }
+    100% { color: #fff; }
+}

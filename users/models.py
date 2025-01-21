@@ -25,7 +25,7 @@ class CustomUser(AbstractUser):
         blank=True
     )
 
-
+'''
 class UserScore(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     current_score = models.IntegerField(default=0)
@@ -33,3 +33,4 @@ class UserScore(models.Model):
 
     def __str__(self):
         return f'{self.user.username} - {self.current_score}/{self.highest_score}'
+'''

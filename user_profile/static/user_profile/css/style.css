@@ -157,7 +157,7 @@
 
 /* Модальное окно смены пароля */
 .modal {
-    display: flex;
+    display: none;
     position: fixed;
     justify-content: center;
     overflow-y: auto;

@@ -1,11 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game</title>
-</head>
-<body>
-    <h1>Would you play this game?</h1>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Игры{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'game/css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="game-container">
+        <h1>Выберите игру</h1>
+
+        <div class="game-selection">
+            <div class="game-card">
+                <div class="game-image" style="background-image: url('{% static 'game/img/ninja-bg.png' %}')"></div>
+                <h2>Ninja Game</h2>
+                <a href="{% url 'game:ninja' %}" class="play-button">Играть</a>
+            </div>
+
+            <div class="game-card">
+                <div class="game-image" style="background-image: url('{% static 'game/img/typing-bg.png' %}')"></div>
+                <h2>Typing Game</h2>
+                <a href="{% url 'game:typing' %}" class="play-button">Играть</a>
+            </div>
+
+            <div class="game-card">
+                <div class="game-image" style="background-image: url('{% static 'game/img/snake-bg.png' %}')"></div>
+                <h2>Snake Game</h2>
+                <a href="{% url 'game:snake' %}" class="play-button">Играть</a>
+            </div>
+        </div>
+
+        <h2 class="leaderboard-title">Таблица лидеров <span><i>можно сортировать</i></span></h2>
+        <div class="leaderboard">
+            <table id="leaderboard-table">
+                <thead>
+                    <tr>
+                        <th>Имя пользователя</th>
+                        <th>Ninja</th>
+                        <th>Snake</th>
+                        <th>Typing</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for score in leaderboard %}
+                        <tr>
+                            <td>{{ score.user.username }}</td>
+                            <td>{{ score.ninja_score|default:"-" }}</td>
+                            <td>{{ score.snake_score|default:"-" }}</td>
+                            <td>{{ score.typing_score|default:"-" }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="4">Пока нет рекордов.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+  {{ block.super }}
+  <script src="{% static 'game/js/script.js' %}"></script>
+{% endblock %}

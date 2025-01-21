@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'game/css/snake.css' %}">
+</head>
+<body>
+    <div class="score">0</div>
+    <div class="stage"></div>
+    <div id="game-over">
+        <h1>ДОИГРАЛСЯ!</h1>
+        <p>Счёт: <span id="final-score">0</span></p>
+        <button id="restart-button">Играть снова</button>
+    </div>
+{% block extra_js %}
+<script src="{% static 'game/js/snake.js' %}"></script>
+{% endblock %}
+</body>
+</html>

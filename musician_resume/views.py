@@ -1,9 +1,11 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from .models import Track, StreamingService, SocialLink
 from django.core.serializers.json import DjangoJSONEncoder
 import json
 
 
+@login_required
 def index(request):
     tracks = Track.objects.all().order_by('title')  # Получаем все треки и сортируем по названию
     streaming_services = StreamingService.objects.filter()  # Получаем активные стримминговые сервисы

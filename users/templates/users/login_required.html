@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Login required{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'users/css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="login-required-container">
+    <div class="header-animation">
+        <p class="warning-text">⚠️ Access Denied ⚠️</p>
+    </div>
+
+    <div class="message-container">
+        <p class="main-message">Для доступа к странице '<strong>{{ page_name }}</strong>' необходима авторизация</p>
+        <p class="sub-message"><i>Пожалуйста, войдите в систему или создайте новый аккаунт</i></p>
+    </div>
+
+    <div class="auth-buttons">
+        <a href="{% url 'login' %}?next={{ next_url }}" class="auth-button login-btn">
+            <span class="button-icon">🔑</span>
+            Войти
+        </a>
+        <a href="{% url 'register' %}?next={{ next_url }}" class="auth-button register-btn">
+            <span class="button-icon">✨</span>
+            Регистрация
+        </a>
+    </div>
+</div>
+{% endblock %}

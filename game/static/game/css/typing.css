@@ -1,0 +1,228 @@
+/*
+- - - - - - - - - - - - - - - - - - - - - - -
+       game/typing.html
+- - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+
+
+/* ========================================================== */
+/*                      Импорт шрифтов                        */
+/* ========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+
+/* ========================================================== */
+/*                    Корневые переменные                      */
+/* ========================================================== */
+
+:root {
+    --bgColor: #333;
+    --textPrimary: #fff;
+    --textSecondary: #666;
+    --primaryColor: #b8ff45;
+
+    /* Размеры */
+    --mainWidth: 600px;
+    --lineHeight: 35px;
+    --gameMaxHeight: 9rem;
+
+    /* Анимации */
+    --transitionSpeed: 0.3s;
+}
+
+
+/* ========================================================== */
+/*                      Общие стили                           */
+/* ========================================================== */
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bgColor);
+    color: var(--textPrimary);
+    font-size: 1.4rem;
+}
+
+main {
+    width: var(--mainWidth);
+    margin: 50px auto;
+}
+
+
+/* ========================================================== */
+/*                    Стили заголовка                         */
+/* ========================================================== */
+
+#header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 20px 6px 30px;
+}
+
+h1 {
+    color: var(--primaryColor);
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+h1 svg {
+    width: 40px;
+    fill: var(--primaryColor);
+}
+
+#info {
+    color: var(--primaryColor);
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+
+/* ========================================================== */
+/*                    Стили кнопок                            */
+/* ========================================================== */
+
+/* Базовые стили кнопок */
+button {
+    background: rgba(255,255,255,.2);
+    border: 0;
+    color: rgba(255,255,255,.5);
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    width: fit-content;
+    max-width: fit-content;
+}
+
+/* Контейнер кнопок */
+#buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    margin: 1px;
+}
+
+/* Кнопка переключения языка */
+#langBtn {
+    font-family: 'Montserrat', sans-serif;
+    transition: all var(--transitionSpeed) ease;
+}
+
+#langBtn:hover {
+    background: rgba(0, 123, 255, 0.4);
+    color: rgba(255, 255, 255, .9);
+    box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+}
+
+/* Кнопка новой игры */
+#newGameBtn {
+    font-family: 'Roboto', sans-serif;
+    transition: all var(--transitionSpeed) ease;
+}
+
+#newGameBtn:hover {
+    background: rgba(255, 235, 59, 0.4);
+    color: rgba(255, 255, 255, .9);
+    box-shadow: 0 0 15px rgba(255, 235, 59, 0.5);
+}
+
+
+/* ========================================================== */
+/*                    Игровая область                         */
+/* ========================================================== */
+
+/* Основной контейнер игры */
+#game {
+    line-height: var(--lineHeight);
+    height: fit-content;
+    max-height: var(--gameMaxHeight);
+    overflow: hidden;
+    position: relative;
+}
+
+#game:focus {
+    outline: 0;
+}
+
+/* Контейнер слов */
+#words {
+    filter: blur(5px);
+    color: var(--textSecondary);
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+#game:focus #words {
+    filter: blur(0);
+}
+
+/* Сообщение о фокусе */
+#focus-error {
+    position: absolute;
+    inset: 0;
+    text-align: center;
+    padding-top: var(--lineHeight);
+}
+
+#game:focus #focus-error {
+    display: none;
+}
+
+/* Стили слов и букв */
+.word {
+    display: inline-block;
+    font-family: 'Roboto Mono', monospace;
+    margin: 0 5px;
+}
+
+.letter.correct {
+    color: var(--textPrimary);
+}
+
+.letter.incorrect {
+    color: #f55;
+}
+
+
+/* ========================================================== */
+/*                    Анимация курсора                        */
+/* ========================================================== */
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+#cursor {
+    display: none;
+    width: 2px;
+    height: 1.6rem;
+    background: var(--primaryColor);
+    position: fixed;
+    top: 198px;
+    left: 100px;
+    animation: blink 0.4s infinite;
+}
+
+#game:focus #cursor {
+    display: block;
+}
+
+
+/* ========================================================== */
+/*                    Состояние окончания игры                */
+/* ========================================================== */
+
+#game.over #words {
+    opacity: 0.5;
+    filter: blur(2px);
+}
+
+#game.over:focus #cursor {
+    display: none;
+}
+
+#game.over #focus-error {
+    display: none;
+}

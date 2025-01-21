@@ -1,0 +1,433 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&family=Bangers&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+.game-container {
+    width: 90%;
+    max-width: 1300px;
+    margin: 30px auto;
+    padding: 30px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(240,245,255,0.9));
+    border-radius: 15px;
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.25),
+        0 4px 10px rgba(0,0,0,0.1),
+        inset 0 0 20px rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.game-container h1 {
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+    color: #2c3e50;
+    font-size: 3rem;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    background: linear-gradient(45deg, #2c3e50, #3498db);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    animation: titlePulse 3s infinite;
+}
+
+.game-selection {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 50px;
+}
+
+.game-card {
+    width: 31%;
+    min-width: 280px;
+    background: linear-gradient(145deg, #ffffff, #f0f0f0);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    border: 2px solid transparent;
+    margin-bottom: 30px;
+}
+
+.game-card:hover {
+    transform: translateY(-15px) scale(1.03);
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2);
+    border-color: #4e54c8;
+}
+
+.game-image {
+    height: 220px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.game-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(0, 0, 0, 0.4) 100%
+    );
+}
+
+.game-card h2 {
+    font-family: 'Rajdhani', sans-serif;
+    text-align: center;
+    padding: 20px;
+    color: #34495e;
+    font-size: 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.play-button {
+    display: block;
+    width: 70%;
+    margin: 20px auto;
+    padding: 12px 25px;
+    background: linear-gradient(to right, #4e54c8, #8f94fb);
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 8px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease, background 0.5s ease;
+    box-shadow:
+        0 4px 8px rgba(78, 84, 200, 0.4),
+        inset 0 2px 2px rgba(255, 255, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.play-button::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    transform: rotate(45deg);
+    animation: buttonShine 2.8s infinite;
+    z-index: 1;
+}
+
+.play-button:hover {
+    background: linear-gradient(to right, #00b4db, #0083b0);
+    transform: translateY(-2px);
+    box-shadow:
+        0 6px 12px rgba(0, 180, 219, 0.6),
+        inset 0 2px 2px rgba(255, 255, 255, 0.3);
+}
+
+.play-button:hover::before {
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+    );
+}
+
+@keyframes buttonShine {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) rotate(45deg); }
+}
+
+@keyframes titlePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+
+.leaderboard {
+    overflow-x: auto;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow:
+        0 4px 8px rgba(0, 0, 0, 0.1),
+        inset 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+.leaderboard-title {
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    left: 34%;
+    padding: 15px;
+    background-color: rgba(19, 55, 77, 0.41);
+    border-radius: 9px;
+    color: #82d9ff;
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow:
+        1px 1px 3px rgba(0, 0, 0, 0.5),
+        0 0 12px rgba(130, 217, 255, 0.6);
+    position: relative;
+    animation: textGlow 4s infinite alternate;
+}
+
+.leaderboard-title::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #0056b3, #8ed6f9);
+    opacity: 0.1;
+    z-index: -1;
+    filter: blur(8px);
+}
+
+.leaderboard-title span {
+    display: block; /* span теперь блочный элемент */
+    font-size: 1rem;
+    text-decoration: underline;
+    color: #ffffbd;
+    opacity: 1;
+    font-family: 'Rajdhani', sans-serif;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+    letter-spacing: 1px;
+    margin-top: 5px; /* отступ сверху */
+}
+
+.leaderboard table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+.leaderboard th {
+    background-color: #f8f8f8;
+    font-weight: 600;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 12px 18px;
+    border-bottom: 2px solid #4e54c8;
+}
+
+.leaderboard td {
+    text-align: center;
+    padding: 12px 18px;
+    color: #444;
+    border-bottom: 2px solid #ddd;
+}
+
+.leaderboard tbody tr:nth-child(even) {
+    background-color: rgba(249, 249, 249, 0.8);
+}
+
+.leaderboard tbody tr:hover {
+    background: linear-gradient(45deg, rgba(78, 84, 200, 0.1), rgba(143, 148, 251, 0.1));
+    transform: scale(1.01);
+    transition: all 0.3s ease;
+}
+
+.leaderboard th:hover {
+    background: linear-gradient(45deg, rgba(78, 84, 200, 0.1), rgba(143, 148, 251, 0.1));
+    transform: scale(0.81);
+    transition: all 0.4s ease;
+}
+
+.leaderboard th, .leaderboard tr {
+    transition: all 0.2s ease;
+}
+
+.leaderboard th:active, .leaderboard tr:active {
+    animation: flash 0.2s ease-out;
+}
+
+@keyframes flash {
+    0% {
+        background: inherit;
+    }
+    50% {
+        background: linear-gradient(45deg,
+            rgba(255, 215, 0, 0.3),
+            rgba(255, 255, 255, 0.5),
+            rgba(78, 84, 200, 0.3)
+        );
+    }
+    100% {
+        background: inherit;
+    }
+}
+
+/*
+# №1 -- Вариант "Ледяное сияние"
+
+```css
+.leaderboard-title {
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+    padding: 15px;
+    background-color: rgba(0, 100, 200, 0.1);
+    color: #b2fefa;
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3), 0 0 5px rgba(178, 254, 250, 0.4);
+    position: relative;
+    animation: titlePulse 3s infinite;
+    opacity: 0.9;
+}
+
+.leaderboard-title::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, #1a75bc, #19c4b8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    z-index: -1;
+    opacity: 0.7;
+    filter: blur(3px);
+}
+
+.leaderboard-title span {
+    font-size: 0.9rem;
+    text-decoration: underline;
+    color: #00d8ff;
+    opacity: 0.8;
+    font-family: 'Rajdhani', sans-serif;
+    letter-spacing: 1px;
+}
+```
+
+Здесь мне понравился бэкграунд и цвет основного текста.
+Но не понравился текст span (он слишком мутный и слов не разберёшь).
+- - - - -
+
+# № 2 -- Вариант "Золотое тиснение"
+
+```css
+.leaderboard-title {
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+    padding: 15px;
+    background-color: rgba(218, 165, 32, 0.1);
+    color: #e6c77e;
+    font-size: 2.1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 2px #000, 0 0 1px #a1957c, 0 0 3px #f0e68c;
+    position: relative;
+    animation: titlePulse 3.5s infinite;
+    opacity: 0.9;
+}
+
+.leaderboard-title::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, #a1887f, #d4ac0d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    z-index: -1;
+    opacity: 0.5;
+    filter: blur(3px);
+}
+
+.leaderboard-title span {
+    font-size: 0.8rem;
+    text-decoration: underline;
+    color: #f0e68c;
+    opacity: 0.8;
+    font-family: 'Rajdhani', sans-serif;
+    letter-spacing: 1px;
+}
+```
+
+Очень классно выполнено тиснение. И бэкграунд.
+Но цвета немного не вписываются в палитру сайта.
+- - - - -
+
+# № 3 -- Вариант "Голубой неон на сером фоне"
+
+```css
+.leaderboard-title {
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+    padding: 15px;
+    background-color: rgba(0, 0, 50, 0.2);
+    color: #5bc0de;
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(91, 192, 222, 0.8), 0 0 20px rgba(0, 123, 255, 0.5);
+    animation: glowHover 2.5s infinite alternate;
+    border-radius: 15px;
+    position: relative;
+}
+
+.leaderboard-title::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #0056b3, #66d9d9);
+    opacity: 0.15;
+    z-index: -1;
+    border-radius: 15px;
+    filter: blur(10px);
+}
+
+.leaderboard-title span {
+    font-size: 0.9rem;
+    text-decoration: underline;
+    color: #a6e7ff;
+    opacity: 0.8;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+@keyframes glowHover {
+    from {
+        text-shadow: 0 0 10px rgba(91, 192, 222, 0.8), 0 0 20px rgba(0, 123, 255, 0.5);
+    }
+    to {
+        text-shadow: 0 0 20px rgba(91, 192, 222, 1), 0 0 30px rgba(0, 123, 255, 0.8);
+    }
+}
+```
+
+Мне нравится, как сочетаются цвета текста с цветами бэкграунда.
+Также очень классно выполнены стили для span.
+Но основной текст то ли светится слишком сильно, то ли цвет не тот. Но, в общем, основной текст немного не читаем.
+*/

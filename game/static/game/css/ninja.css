@@ -1,0 +1,146 @@
+/* ========================================================== */
+/*                         Основа                             */
+/* ========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Marck+Script&display=swap');
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  cursor: url('../img/cursor.png'), pointer;
+}
+
+
+/* ========================================================== */
+/*                       Контент                              */
+/* ========================================================== */
+
+/* Игра */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+
+/* Счёт */
+#score {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  font-size: 2em;
+  font-weight: 900;
+  font-family: 'Comic Sans MS', cursive;
+  background: linear-gradient(45deg, #001aff, #00a2ff, #001aff);
+  background-size: 200% 200%;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientFlow 3s infinite linear;
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+/* Вступление */
+#introduction {
+  width: 240px;
+  max-width: 90%;
+  height: auto;
+  padding: 20px;
+  position: absolute;
+  user-select: none;
+  -webkit-user-drag: none;
+  top: 10%;
+  font-size: 1.1em;
+  font-family: "Marck Script", cursive;
+  text-align: center;
+  color: #280336;
+
+  text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.3);
+
+  transition: opacity 1s, transform 0.5s;
+  transform: scale(0.9);
+}
+
+
+
+/* Заново */
+#restart {
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  border-radius: 50%;
+  color: white;
+  font-weight: 700;
+  font-size: 1.2em;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  display: none;
+  cursor: pointer;
+
+  background: linear-gradient(45deg, #c40000, #ff0000, #c40000);
+  background-size: 200% 200%;
+  animation: restartGlow 3s infinite linear;
+
+  text-transform: uppercase;
+  text-align: center;
+  text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);
+
+  border: none;
+  box-shadow: 0px 5px 15px rgba(255, 0, 0, 0.6), inset 0px -5px 10px rgba(100, 0, 0, 0.8);
+
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#restart:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 7px 20px rgba(255, 0, 0, 0.9), inset 0px -5px 10px rgba(150, 0, 0, 0.9);
+}
+
+#restart:active {
+  transform: scale(0.95);
+  box-shadow: 0px 3px 10px rgba(255, 0, 0, 0.7), inset 0px -3px 6px rgba(100, 0, 0, 0.9);
+}
+
+@keyframes restartGlow {
+  0% { background-position: 0% 50%; text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5); }
+  50% { background-position: 100% 50%; text-shadow: 0px 0px 15px rgba(255, 255, 255, 0.9); }
+  100% { background-position: 0% 50%; text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5); }
+}
+
+
+/* Идеально */
+#perfect {
+  position: absolute;
+  opacity: 0;
+  user-select: none;
+  -webkit-user-drag: none;
+  font-size: 2.5em;
+  font-weight: 900;
+  font-family: 'Fantasy', cursive;
+  color: #ff0;
+  text-shadow: 0px 0px 10px #ff0, 0px 0px 20px #ff8000;
+  animation: sparks 1s infinite alternate ease-in-out, sparkles 1.5s infinite ease-in-out;
+}
+
+@keyframes sparks {
+  0% { text-shadow: 0px 0px 5px #ff0, 0px 0px 10px #ff0, 0px 0px 15px #ff0; }
+  50% { text-shadow: 0px 0px 10px #ff8000, 0px 0px 15px #ff8000, 0px 0px 20px #ff8000; }
+  100% { text-shadow: 0px 0px 5px #ff0, 0px 0px 10px #ff0, 0px 0px 15px #ff0; }
+}
+
+@keyframes sparkles {
+  0%, 100% { transform: scale(0.8) rotate(0deg); }
+  50% { transform: scale(1.2) rotate(10deg); }
+}
