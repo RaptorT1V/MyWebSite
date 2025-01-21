@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Корзина{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'merch/css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Ваша корзина</h1>
+    {% if basket.basketitem_set.all %}
+    <table>
+        <thead>
+            <tr>
+                <th>Товар</th>
+                <th>Количество</th>
+                <th>Цена за единицу</th>
+                <th>Стоимость</th>
+                <th>Действие</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in basket.basketitem_set.all %}
+            <tr>
+                <td>
+                    <a href="{% url 'merch:product_detail' slug=item.product.slug %}">
+                        {{ item.product.name }}
+                    </a>
+                </td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.price_item }} руб.</td>
+                <td>{{ item.subtotal }} руб.</td>
+                <td>
+                    <form action="{% url 'merch:cart_remove' product_id=item.product.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit">Удалить</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3">Итого:</td>
+                <td>{{ basket.total_price }} руб.</td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+    <form action="{% url 'merch:order_create' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Оформить заказ</button>
+    </form>
+    {% else %}
+    <p>Ваша корзина пуста.</p>
+    {% endif %}
+</div>
+{% endblock %}

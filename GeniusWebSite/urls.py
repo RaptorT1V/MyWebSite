@@ -27,7 +27,7 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
     path('programmer-resume/', include('programmer_resume.urls')),
     path('musician-resume/', include('musician_resume.urls')),
-    path('merch/', include('merch.urls')),
+    path('merch/', include('merch.urls', namespace='merch')),
     path('forum/', include('forum.urls')),
     path('game/', include('game.urls')),
     path('user-profile/', include('user_profile.urls')),

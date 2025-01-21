@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Заказ №{{ order.id }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'merch/css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Заказ №{{ order.id }}</h1>
+    <p>Дата: {{ order.order_date }}</p>
+    <p>Статус: {{ order.get_status_display }}</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Товар</th>
+                <th>Количество</th>
+                <th>Цена за единицу</th>
+                <th>Стоимость</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in order.orderitem_set.all %}
+            <tr>
+                <td>
+                    <a href="{% url 'merch:product_detail' slug=item.product.slug %}">
+                        {{ item.product.name }}
+                    </a>
+                </td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.price_item }} руб.</td>
+                <td>{{ item.quantity|multiply:item.price_item }} руб.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3">Итого:</td>
+                <td>{{ order.total_price }} руб.</td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+{% endblock %}

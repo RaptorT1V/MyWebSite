@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'merch/css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="product-detail">
+        <div class="product-image">
+            <img src="{{ product.main_image.url }}" alt="{{ product.name }}">
+        </div>
+        <div class="product-info">
+            <h1>{{ product.name }}</h1>
+            <p class="price">{{ product.current_price }} руб.</p>
+            <p>{{ product.description }}</p>
+            {% if product.size %}
+            <p>Размер: {{ product.size }}</p>
+            {% endif %}
+            {% if product.color %}
+            <p>Цвет: {{ product.color }}</p>
+            {% endif %}
+            {% if product.is_available %}
+            <form action="{% url 'merch:cart_add' product_id=product.id %}" method="post">
+                {% csrf_token %}
+                <label for="quantity">Количество:</label>
+                <input type="number" name="quantity" id="quantity" value="1" min="1" max="{{ product.stock }}">
+                <button type="submit">В корзину</button>
+            </form>
+            {% else %}
+            <p class="out-of-stock">Нет в наличии</p>
+            {% endif %}
+            {% if related_products %}
+            <h2>Похожие товары</h2>
+            <div class="related-products">
+                {% for related_product in related_products %}
+                <div class="related-product">
+                    <a href="{% url 'merch:product_detail' slug=related_product.slug %}">
+                        <img src="{{ related_product.main_image.url }}" alt="{{ related_product.name }}">
+                    </a>
+                    <h3><a href="{% url 'merch:product_detail' slug=related_product.slug %}">{{ related_product.name }}</a></h3>
+                    <p class="price">{{ related_product.current_price }} руб.</p>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
