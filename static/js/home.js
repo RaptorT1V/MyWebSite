@@ -1,3 +1,9 @@
+/*
+= = = = = = = = = = = = = = = = = = = = = =
+    Анимация текста на главной странице
+= = = = = = = = = = = = = = = = = = = = = =
+*/
+
 const text = "Welcome to Genius Web Site";
 const container = document.getElementById("gravity-text");
 const letters = text.split("");
@@ -26,6 +32,7 @@ letters.forEach((letter, index) => {
         span.style.animation = 'pulse 2s infinite';
     }, 50 * index);
 });
+
 
 container.addEventListener("mousemove", (e) => {
     const spans = container.querySelectorAll("span");
@@ -64,4 +71,13 @@ container.addEventListener("click", () => {
             span.style.opacity = 1;
         }, 1000);
     });
+});
+
+/* Для смены курсора */
+container.addEventListener("mousedown", () => {
+    container.style.cursor = "url('./static/img/cursors/aim2.png'), pointer";
+});
+
+container.addEventListener("mouseup", () => {
+    container.style.cursor = "url('./static/img/cursors/aim.png'), pointer";
 });

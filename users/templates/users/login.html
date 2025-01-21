@@ -11,9 +11,6 @@
 {% block content %}
   <h2 class="h2-left">Login</h2>
 
-   <!-- Всплывающее сообщение -->
-  <div id="popup-message" class="popup-message"></div>
-
   <form method="post">
       {% csrf_token %}
       {{ form.as_p }}

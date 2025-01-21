@@ -36,6 +36,7 @@
             <table id="leaderboard-table">
                 <thead>
                     <tr>
+                        <th>№</th>
                         <th>Имя пользователя</th>
                         <th>Ninja</th>
                         <th>Snake</th>
@@ -45,14 +46,15 @@
                 <tbody>
                     {% for score in leaderboard %}
                         <tr>
-                            <td>{{ score.user.username }}</td>
+                            <td></td>
+                            <td><a href="{% url 'user_profile:user_detail' score.user.username %}">{{ score.user.username }}</a></td>
                             <td>{{ score.ninja_score|default:"-" }}</td>
                             <td>{{ score.snake_score|default:"-" }}</td>
                             <td>{{ score.typing_score|default:"-" }}</td>
                         </tr>
                     {% empty %}
                         <tr>
-                            <td colspan="4">Пока нет рекордов.</td>
+                            <td colspan="5">Пока нет рекордов.</td>
                         </tr>
                     {% endfor %}
                 </tbody>

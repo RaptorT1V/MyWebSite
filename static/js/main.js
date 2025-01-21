@@ -1,3 +1,4 @@
+/* Всплывающие сообщения */
 function showPopupMessage(message, messageType = 'success') {
     const popup = document.getElementById('popup-message');
     popup.textContent = message;
@@ -31,6 +32,7 @@ function showPopupMessage(message, messageType = 'success') {
         }, 2500);
     }
 }
+
 
 window.addEventListener('DOMContentLoaded', function () {
     const messageBox = document.getElementById('popup-message');

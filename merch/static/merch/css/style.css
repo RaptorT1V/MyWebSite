@@ -1,0 +1,243 @@
+/* Общие стили */
+body {
+  font-family: 'Roboto', sans-serif;
+  background: #e0e5ec; /* Нейроморфный фон */
+  color: #31344b;
+  line-height: 1.5;
+  padding: 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px;
+  background: #e0e5ec;
+  border-radius: 20px;
+  box-shadow: 10px 10px 30px rgba(174, 174, 192, 0.4), -10px -10px 30px #ffffff; /* Нейроморфная тень */
+}
+
+h1 {
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 36px;
+  color: #6c757d;
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Панель поиска */
+.search-bar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.search-bar form {
+  display: flex;
+  align-items: center;
+  background: #e0e5ec;
+  padding: 10px 20px;
+  border-radius: 50px;
+  box-shadow: 5px 5px 15px rgba(174, 174, 192, 0.4), -5px -5px 15px #ffffff;
+}
+
+.search-bar input[type="text"] {
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  color: #31344b;
+  margin-right: 10px;
+  outline: none;
+  width: 300px;
+}
+
+.search-bar button[type="submit"] {
+  border: none;
+  background: linear-gradient(145deg, #d2d8e1, #f6f8fc); /* Легкий градиент */
+  color: #6c757d;
+  padding: 10px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 5px 5px 10px rgba(174, 174, 192, 0.4);
+  transition: all 0.3s ease;
+}
+
+.search-bar button[type="submit"]:hover {
+  background: linear-gradient(145deg, #f6f8fc, #d2d8e1);
+  box-shadow: 2px 2px 5px rgba(174, 174, 192, 0.4);
+}
+
+/* Карточки товаров */
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 30px;
+}
+
+.product {
+  background: #e0e5ec;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 7px 7px 20px rgba(174, 174, 192, 0.4), -7px -7px 20px #ffffff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.product:hover {
+  transform: translateY(-5px);
+  box-shadow: 10px 10px 30px rgba(174, 174, 192, 0.4), -10px -10px 30px #ffffff;
+}
+
+.product img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 15px;
+  margin-bottom: 15px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.product:hover img{
+  transform: scale(1.05);
+}
+
+.product h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.product h3 a {
+  color: #31344b;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.product h3 a:hover {
+  color: #00d7ff; /* Неоновый акцент */
+}
+
+.product .price {
+  font-size: 18px;
+  color: #ff4081; /* Неоновый акцент */
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.product form {
+  display: flex;
+  justify-content: center;
+}
+
+.product button[type="submit"] {
+  border: none;
+  background: #00d7ff; /* Неоновый акцент */
+  color: #fff;
+  padding: 10px 25px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0px 5px 10px rgba(0, 215, 255, 0.4);
+  transition: all 0.3s ease;
+}
+
+.product button[type="submit"]:hover {
+  background: #00b5d6;
+  box-shadow: 0px 2px 5px rgba(0, 215, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.product .out-of-stock {
+  text-align: center;
+  color: #dc3545;
+  font-weight: bold;
+}
+
+/* Пагинация */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  font-size: 18px;
+}
+
+.pagination a {
+  color: #6c757d;
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 5px;
+  margin: 0 5px;
+  box-shadow: 3px 3px 7px rgba(174, 174, 192, 0.4), -3px -3px 7px #ffffff;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.pagination a:hover {
+  background: #00d7ff;
+  color: #fff;
+}
+
+.pagination .current {
+  padding: 8px 16px;
+  margin: 0 5px;
+  font-weight: bold;
+}
+
+/* Динамическая подсветка */
+.product::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at var(--x) var(--y), rgba(0, 215, 255, 0.3) 0%, rgba(0, 215, 255, 0) 40%);
+  border-radius: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.product:hover::before {
+  opacity: 1;
+}
+
+.product:hover{
+  cursor: none;
+}
+
+.product {
+  position: relative;
+}
+
+.product::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #00d7ff;
+  border-radius: 50%;
+  opacity: 0.8;
+  pointer-events: none;
+  box-shadow: 0 0 20px 5px #00d7ff;
+  transition: transform 0.1s ease;
+  will-change: transform;
+  z-index: 10;
+}
+
+@keyframes move-shadow {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(10px, 5px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+.product:hover::after{
+  animation: move-shadow 2s infinite;
+}

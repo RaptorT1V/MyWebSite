@@ -1,6 +1,5 @@
 from django.db import models
 from django.conf import settings
-from django.contrib.auth.models import User
 
 
 class GameScore(models.Model):
@@ -16,7 +15,6 @@ class GameScore(models.Model):
         return f"{self.user.username}'s scores"
 
     def update_score(self, game_type, new_score):
-        """Обновляет рекорд, если он побит."""
         if game_type == 'ninja':
             if self.ninja_score is None or new_score > self.ninja_score:
                 self.ninja_score = new_score

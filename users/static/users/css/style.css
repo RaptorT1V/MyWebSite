@@ -5,10 +5,13 @@
 */
 
 
+/* Блок импортов */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
+
+/* Базовые стили */
 body {
     font-family: 'Inter', sans-serif;
 }
@@ -55,7 +58,7 @@ body {
     margin: 0;
     padding: 0;
     animation:
-        moveText 6s linear infinite,  /* Уменьшили время с 6s до 4s */
+        moveText 6s linear infinite,
         alertPulse 2s ease-in-out infinite;
 }
 
@@ -65,7 +68,7 @@ body {
         transform: translateX(-130%);
     }
     100% {
-        transform: translateX(130%);  /* Увеличили со 100% до 200% */
+        transform: translateX(130%);
     }
 }
 
@@ -89,7 +92,7 @@ body {
 }
 
 
-/* Добавляем эффект мерцающей рамки */
+/* Эффект мерцающей рамки */
 .login-required-container {
     position: relative;
 }
@@ -163,7 +166,7 @@ body {
     text-decoration: none;
     font-weight: 600;
     font-size: 1.1rem;
-    font-family: 'Press Start 2P', sans-serif; /* Футуристичный шрифт */
+    font-family: 'Press Start 2P', sans-serif;
     letter-spacing: 1.2px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     color: #fff;
@@ -237,6 +240,7 @@ body {
     color: inherit;
 }
 
+
 /* Адаптивность */
 @media (max-width: 768px) {
     .login-required-container {
@@ -263,13 +267,14 @@ body {
 */
 
 
+/* Базовые стили */
 form {
     position: relative;
-    background-color: rgba(255, 255, 255, 0.1); /* Прозрачный фон */
-    backdrop-filter: blur(10px); /* Размытие фона */
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
     padding: 40px;
     border-radius: 20px;
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Стеклянная тень */
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     border: 1px solid rgba(255, 255, 255, 0.18);
     color: #fff;
 }
@@ -285,6 +290,8 @@ label {
     color: #eee;
 }
 
+
+/* Поля ввода данных */
 input[type="text"],
 input[type="email"],
 input[type="password"] {
@@ -305,8 +312,10 @@ input[type="password"]:focus {
     box-shadow: 0 0 15px rgba(162, 155, 254, 0.6);
 }
 
+
+/* Кнопка войти|зарегистрироваться */
 button[type="submit"] {
-    background: linear-gradient(45deg, #ff9ff3, #feca57, #ff7675, #a29bfe); /* Переливающийся градиент */
+    background: linear-gradient(45deg, #ff9ff3, #feca57, #ff7675, #a29bfe);
     background-size: 400% 400%;
     color: #fff;
     padding: 14px 30px;
@@ -314,11 +323,11 @@ button[type="submit"] {
     border-radius: 12px;
     cursor: pointer;
     font-weight: bold;
-    animation: gradientShift 8s linear infinite; /* Анимация перелива */
+    animation: gradientShift 8s linear infinite;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     position: relative;
-    overflow: hidden; /* Чтобы скрыть выходящий за рамки элемент */
+    overflow: hidden;
 }
 
 @keyframes gradientShift {
@@ -338,7 +347,6 @@ button[type="submit"]:hover {
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Эффект "волны" при наведении */
 button[type="submit"]::before {
     content: '';
     position: absolute;
@@ -349,7 +357,7 @@ button[type="submit"]::before {
     background: rgba(255, 255, 255, 0.3);
     transform: skewX(-45deg);
     transition: left 0.5s;
-    z-index: 1; /* Убедиться, что "волна" сверху */
+    z-index: 1;
 }
 
 button[type="submit"]:hover::before {
@@ -357,31 +365,32 @@ button[type="submit"]:hover::before {
 }
 
 button[type="submit"] span {
-    position: relative; /* Чтобы текст был поверх "волны" */
+    position: relative;
     z-index: 2;
 }
 
 
-.h2-wrapper { /* Обертка для симметричного расположения */
+/* Анимированные заголовки */
+.h2-wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    position: absolute; /* Абсолютное позиционирование относительно родителя */
-    top: 30px; /* Настройка отступа сверху */
+    position: absolute;
+    top: 30px;
     left: 0;
-    padding: 0 20px; /* Отступы по бокам */
+    padding: 0 20px;
 }
 
 .h2-left, .h2-right {
     margin: 5rem;
-    display: block; /* Изменяем на block */
+    display: block;
     white-space: nowrap;
     font-size: 2.2rem;
     font-weight: bold;
-    text-shadow: 0 0 10px #ff3e3e, 0 0 20px #ff3e3e, 0 0 30px #ff3e3e; /* Неоновое свечение */
+    text-shadow: 0 0 10px #ff3e3e, 0 0 20px #ff3e3e, 0 0 30px #ff3e3e;
     color: #fff;
-    animation-duration: 4s; /* Ускорим анимацию */
+    animation-duration: 4s;
 }
 
 .h2-left {

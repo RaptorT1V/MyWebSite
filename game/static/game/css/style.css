@@ -1,6 +1,20 @@
+/*
+- - - - - - - - - - - - - - - - - - - - -
+            game/index.html
+- - - - - - - - - - - - - - - - - - - - -
+*/
+
+
+/* Импорт шрифтов */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&family=Bangers&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
+
+/* ========================================================== */
+/*                Игровые контейнеры и карточки               */
+/* ========================================================== */
+
+/* Контейнер */
 .game-container {
     width: 90%;
     max-width: 1300px;
@@ -30,6 +44,7 @@
     animation: titlePulse 3s infinite;
 }
 
+/* Выбор игры */
 .game-selection {
     display: flex;
     justify-content: space-between;
@@ -38,6 +53,8 @@
     margin-bottom: 50px;
 }
 
+
+/* Игровая карточка */
 .game-card {
     width: 31%;
     min-width: 280px;
@@ -57,6 +74,7 @@
     border-color: #4e54c8;
 }
 
+/* Картинка игры */
 .game-image {
     height: 220px;
     background-size: cover;
@@ -79,6 +97,7 @@
     );
 }
 
+/* Текст с названием игры */
 .game-card h2 {
     font-family: 'Rajdhani', sans-serif;
     text-align: center;
@@ -90,6 +109,8 @@
     letter-spacing: 1px;
 }
 
+
+/* Кнопка "Играть" */
 .play-button {
     display: block;
     width: 70%;
@@ -159,6 +180,10 @@
 }
 
 
+/* ======================================================== */
+/*                     Таблица пидеров                      */
+/* ======================================================== */
+
 .leaderboard {
     overflow-x: auto;
     background-color: rgba(255, 255, 255, 0.7);
@@ -205,7 +230,7 @@
 }
 
 .leaderboard-title span {
-    display: block; /* span теперь блочный элемент */
+    display: block;
     font-size: 1rem;
     text-decoration: underline;
     color: #ffffbd;
@@ -213,13 +238,16 @@
     font-family: 'Rajdhani', sans-serif;
     text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
     letter-spacing: 1px;
-    margin-top: 5px; /* отступ сверху */
+    margin-top: 5px;
 }
 
+
+/* Сама таблица */
 .leaderboard table {
     width: 100%;
     border-collapse: collapse;
     font-family: 'Rajdhani', sans-serif;
+    counter-reset: row-num;
 }
 
 .leaderboard th {
@@ -247,6 +275,13 @@
     background: linear-gradient(45deg, rgba(78, 84, 200, 0.1), rgba(143, 148, 251, 0.1));
     transform: scale(1.01);
     transition: all 0.3s ease;
+}
+
+.leaderboard tbody tr td:first-child::before {
+    counter-increment: row-num;
+    content: counter(row-num);
+    display: block;
+    text-align: center;
 }
 
 .leaderboard th:hover {
@@ -278,6 +313,10 @@
         background: inherit;
     }
 }
+
+
+/*  - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
+
 
 /*
 # №1 -- Вариант "Ледяное сияние"

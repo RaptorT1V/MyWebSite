@@ -1,11 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forum</title>
-</head>
-<body>
-    <h1>Welcome to Forum Section</h1>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Форум{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'forum/css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="coming-soon big-variation cyberpunk-theme">
+    <div class="scanlines"></div>
+  <div class="glitch-image-container">
+    <img src="{% static 'forum/img/under-construction.png' %}" alt="Ведутся работы" class="construction-image">
+     <div class="scan-beam"></div>
+  </div>
+  <h1 id="dynamic-title" class="glitch" data-text="Форум скоро откроется!"></h1>
+  <p>Следите за обновлениями...</p>
+  <div id="timer">
+    Время до запуска: <span id="countdown"></span>
+  </div>
+  <div class="circuit-board"></div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'forum/js/script.js' %}"></script>
+{% endblock %}

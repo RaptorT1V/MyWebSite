@@ -2,19 +2,16 @@ from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect
 from .forms import CustomUserCreationForm, CustomAuthenticationForm
-
+from user_profile.models import Profile
 
 
 def login_required_view(request):
-    # Получаем оригинальный запрошенный путь из параметра 'next'
     next_url = request.GET.get('next', '/').strip('/')
 
-    # Запрещаем перенаправление на страницы, которые требуют авторизации
     protected_pages = ['login-required', 'login', 'register']
     if next_url in protected_pages:
-        next_url = '/'  # Перенаправляем на главную страницу
+        next_url = '/'
 
-    # Словарь для перевода URL в понятные названия
     page_names = {
         'game': 'Игры',
         'forum': 'Форум',
@@ -23,16 +20,14 @@ def login_required_view(request):
         'programmer-resume': 'Резюме программиста',
     }
 
-    # Получаем название страницы из словаря или используем URL как есть
     page_name = page_names.get(next_url, next_url.capitalize())
 
-    # Преобразуем next_url в полный путь
     if not next_url.startswith('/'):
         next_url = '/' + next_url + '/'
 
     context = {
-        'page_name': page_name,  # Передаём название страницы в контекст
-        'next_url': next_url,  # Добавляем next_url в контекст
+        'page_name': page_name,
+        'next_url': next_url,
     }
 
     return render(request, 'users/login_required.html', context)
@@ -71,6 +66,7 @@ def register(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
+            Profile.objects.create(user=user)
             login(request, user)
             messages.success(request, 'Success! Регистрация прошла успешно! Congratulations, buddy!')
             if next_url:

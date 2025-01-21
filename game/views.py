@@ -6,7 +6,7 @@ from django.http import JsonResponse
 
 @login_required
 def index(request):
-    leaderboard = GameScore.objects.all().order_by('-ninja_score', '-snake_score', '-typing_score')
+    leaderboard = GameScore.objects.all().order_by('-ninja_score', '-snake_score', '-typing_score')[:10]
 
     context = {
         'leaderboard': leaderboard,
@@ -20,7 +20,7 @@ def save_score(request):
     if request.method == 'POST':
         game_name = request.POST.get('game')
         score = float(request.POST.get('score'))
-        score = round(score)  # Округляем score до целого
+        score = round(score)
 
         user = request.user
         try:

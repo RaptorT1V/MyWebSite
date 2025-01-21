@@ -76,7 +76,7 @@
     margin: 0;
     cursor: pointer;
     background-color: transparent;
-    transition: all 0.3s ease;       /* добавляем плавную анимацию */
+    transition: all 0.3s ease;
 }
 
 .icon:hover {
@@ -115,6 +115,7 @@
 .icon-zoom {
     position: absolute;
     top: 20px;
+    padding: 5px;
     left: 50%;
     transform: translateX(-125%);
 }

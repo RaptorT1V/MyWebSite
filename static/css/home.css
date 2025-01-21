@@ -1,8 +1,24 @@
+/*
+= = = = = = = = = = = = = = = =
+          home.css
+= = = = = = = = = = = = = = = =
+*/
+
+
+/* Базовые стили */
 body {
     overflow-y: hidden;
     overflow-x: hidden;
 }
 
+
+/* Контент */
+.main-content {
+    cursor: url('../img/cursors/aim.png'), auto;
+}
+
+
+/* Текст */
 #gravity-text {
     position: relative;
     font-size: 4em;
@@ -26,7 +42,7 @@ body {
 }
 
 #gravity-text span:hover {
-    cursor: pointer;
+    cursor: url('../img/cursors/aim1.png'), pointer;
 }
 
 @keyframes pulse {
