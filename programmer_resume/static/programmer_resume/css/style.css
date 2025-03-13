@@ -188,14 +188,16 @@
 
 .pdf-viewer {
     width: 100%;
-    height: 550px;
+    height: calc(100vh - 1em);
+    max-height: 62em;
     overflow: hidden;
     border-radius: 4px;
 }
 
 .pdf-frame {
     width: 100%;
-    height: 550px;
+    height: calc(100vh - 5em);
+    max-height: calc(100vh - 5em);
     border: none;
 }
 
@@ -219,12 +221,13 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
-    max-height: calc(100vh - 300px);
+    max-height: calc(100vh - 5em);
     overflow-y: auto;
 }
 
 .certificate-card {
     background: white;
+    height: fit-content;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

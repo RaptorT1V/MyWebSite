@@ -3,7 +3,6 @@ from users.models import CustomUser
 from django.utils.text import slugify
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
-from django.conf import settings
 from django.core.validators import MinValueValidator
 
 
@@ -22,15 +21,14 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    # Основная информация
     name = models.CharField(max_length=255, verbose_name="Название товара")
     slug = models.SlugField(max_length=255, unique=True, verbose_name="URL")
     category = models.ForeignKey(Category, related_name='products', on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Категория")
 
-    # Описание и характеристики
     description = models.TextField(blank=True, verbose_name="Описание товара")
     size = models.CharField(max_length=50, blank=True, verbose_name="Размер")
     color = models.CharField(max_length=50, blank=True, verbose_name="Цвет")
+    weight = models.CharField(max_length=50, blank=True, verbose_name="Вес")
 
     # Цены и наличие
     price = models.DecimalField(

@@ -41,7 +41,7 @@ def product_list(request, category_slug=None):
         'products': products,
         'search_query': search_query
     }
-    return render(request, 'merch/product/list.html', context)
+    return render(request, 'merch/product/list2.html', context)
 
 
 def product_detail(request, slug):

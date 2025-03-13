@@ -23,7 +23,7 @@ class ProductAdmin(admin.ModelAdmin):
             'fields': ('name', 'slug', 'category')
         }),
         ('Описание и характеристики', {
-            'fields': ('description', 'size', 'color')
+            'fields': ('description', 'size', 'color', 'weight')
         }),
         ('Цены и наличие', {
             'fields': ('price', 'discount_price', 'stock', 'available')
@@ -32,7 +32,7 @@ class ProductAdmin(admin.ModelAdmin):
             'fields': ('main_image',)
         }),
         ('Дополнительно', {
-            'fields': ('featured', 'created', 'updated')
+            'fields': ('featured',)
         }),
     )
 

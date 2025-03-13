@@ -34,10 +34,10 @@
     text-align: center;
     color: #2c3e50;
     font-size: 3rem;
-    margin-bottom: 40px;
+    margin: 10px 0px 40px 0px;
     text-transform: uppercase;
-    letter-spacing: 3px;
-    background: linear-gradient(45deg, #2c3e50, #3498db);
+    letter-spacing: 2px;
+    background: linear-gradient(0deg, #FF1493, #FF69B4, #D53827, #FF6347, #FFB347, #FFE4E1); /* или background: linear-gradient(0deg, #FF69B4, #D53827, #FF6347, #FFB347); */
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
